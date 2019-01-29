@@ -6,23 +6,14 @@ class CourseTable extends React.Component {
 
     constructor(props) {
         super(props);
-        this.courseService = CourseService.instance;
+        this.courseService = new CourseService();
         this.renderView = this.renderView.bind(this);
-        this.state = {view: 'tabs', course: {}, courses: [], sidebarOpen: false};
-    }
-
-    componentDidMount(){
-        this.findAllCourses();
-    }
-
-    findAllCourses(){
-        var courses = require('../resources/courses');
-        this.setState({courses : courses});
-        // this.courseService
-        //     .findAllCourses()
-        //     .then((courses) => {
-        //         this.setState({courses : courses});
-        //     })
+        //this.state = {view: 'list', course: {}, courses: this.state.courses, sidebarOpen: false};
+        this.state = {
+            courses: this.courseService.findAllCourses(),
+            view: 'list',
+            course: {}
+        }
     }
 
     renderView(){

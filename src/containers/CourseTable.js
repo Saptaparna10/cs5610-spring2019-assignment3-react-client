@@ -8,14 +8,15 @@ class CourseTable extends React.Component {
 
     constructor(props) {
         super(props);
-        this.courseService = CourseService.instance;
+        this.courseService = new CourseService();
         this.renderView = this.renderView.bind(this);
         this.toggleView = this.toggleView.bind(this);
-        this.state = {view: 'list', course: {}, courses: [], sidebarOpen: false};
-    }
-
-    componentDidMount(){
-        this.findAllCourses();
+        //this.state = {view: 'list', course: {}, courses: this.state.courses, sidebarOpen: false};
+        this.state = {
+            courses: this.courseService.findAllCourses(),
+            view: 'list',
+            course: {}
+        }
     }
 
     toggleView(){
@@ -25,15 +26,6 @@ class CourseTable extends React.Component {
             this.setState({view: 'list'});
     }
 
-    findAllCourses(){
-        var courses = require('../resources/courses');
-        this.setState({courses : courses});
-        // this.courseService
-        //     .findAllCourses()
-        //     .then((courses) => {
-        //         this.setState({courses : courses});
-        //     })
-    }
 
     renderView(){
          if(this.state.view === 'list'){
@@ -78,11 +70,7 @@ class CourseTable extends React.Component {
     renderCourseRow(){
         var courses = this.state.courses.map(
             (course, index) => {
-
-                // if(this.state.view === 'list')
-                    return <CourseRow key={index} course={course}  />
-                // else
-                //     return <CourseCard key={index} course={course}/>
+                 return <CourseRow key={index} course={course}  />
             }
         )
 

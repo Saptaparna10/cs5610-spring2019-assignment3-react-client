@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 import CourseService from "../services/CourseService";
 
 export default class CourseRow extends React.Component{
@@ -12,7 +13,8 @@ export default class CourseRow extends React.Component{
             <tr>
                 <td> <i className='fa fa-file-text'>&nbsp;</i></td>
                 <td>
-                    {this.props.course.title}
+                    <Link to={`/course/${this.props.course.id}`}>
+                        {this.props.course.title}</Link>
                 </td>
                 <td>me</td>
                 <td>6:45 PM</td>
