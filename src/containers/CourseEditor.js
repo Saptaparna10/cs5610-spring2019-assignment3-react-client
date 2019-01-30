@@ -17,14 +17,27 @@ export default class CourseEditor
         const course = this.courseService.findCourseById(courseId)
         this.state = {
             course: course,
-            module: course.modules[0]
+            module: course.modules[0],
+            lesson: course.modules[0].lessons[0],
+            topic: course.modules[0].lessons[0].topics[0]
         }
+
     }
 
 
     selectModule = module =>
         this.setState({
             module: module
+        })
+
+    selectLesson = lesson =>
+        this.setState({
+            lesson: lesson
+        })
+
+    selectTopic = topic =>
+        this.setState({
+            topic: topic
         })
 
     render(){
@@ -38,10 +51,10 @@ export default class CourseEditor
                 <div className="row">
                     <div className="col-md-4 bg-dark longcol">
                             <ModuleList
-                                selectModule={this.selectModule}
                                 modules={this.state.course.modules}
                                 course={this.state.course}
                                 courseId={this.state.course.id}
+                                selectModule={this.selectModule}
                             />
 
                     </div>
@@ -51,8 +64,17 @@ export default class CourseEditor
                                     lessons={this.state.module.lessons}
                                     moduleid={this.state.module.id}
                                     courseId={this.state.course.id}
+                                    selectLesson={this.selectLesson}
                             />
-                            <TopicPills/>
+                            <TopicPills
+                                courseId={this.state.course.id}
+                                moduleId={this.state.module.id}
+                                lessons={this.state.module.lessons}
+                                topic={this.state.topic}
+                                topics={this.state.lesson.topics}
+                                selectTopic={this.selectTopic}
+                            />
+
                             <div className="row">
                                 <div className="col-sm-9"></div>
                                 <div className="col-sm-1">

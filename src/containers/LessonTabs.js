@@ -28,6 +28,7 @@ export default class LessonsTabs
         super(props);
         this.state={
             selectedLesson: 0,
+            // module: this.props.module,
             moduleId: this.props.moduleId,
             courseId: this.props.courseId,
             lesson: {title: ''},
@@ -58,27 +59,31 @@ export default class LessonsTabs
         });
     }
 
-    setLessons(lessons){
-        this.setState({lessons : lessons})
-    }
-
     selectLesson(lessonIndex){
         this.setState({selectedLesson: lessonIndex});
     }
 
 
     createLesson(){
-        // this.lessonService.createLesson(this.state.courseId, this.state.moduleId, this.state.lesson)
-        //     .then(() => {
-        //         this.findAllLessonsForModule(this.state.moduleId, this.state.courseId);
-        //     })
+
+        this.setState(
+            {
+                lessons: [
+                    ...this.state.lessons,
+                    this.state.lesson
+                ]
+            }
+        )
     }
 
-    deleteLesson(lessonId){
+    deleteLesson(lesson){
         // this.lessonService.deleteLesson(lessonId)
         //     .then(() => {
         //         this.findAllLessonsForModule(this.state.moduleId, this.state.courseId)
         //     });
+        var removeIndex = this.state.lessons.map(function(item) { return item.title; }).indexOf(lesson.title);
+
+        this.state.lessons.splice(removeIndex, 1);
     }
 
     renderLessons(){
@@ -92,23 +97,17 @@ export default class LessonsTabs
                                active={active}
                                lesson={lesson}
                                select={this.selectLesson}
-                               delete={this.confirmDelete}
-                               editable={this.props.editable}
+                               delete={this.deleteLesson}
                 />
             )
         });
 
-        if(this.state.showView){
             return (
                 <div className='container-fluid'>
                     <div className='row'>
                         <div className="nav nav-tabs" id='nav-tab' role='tablist'>
                             {lessons}
-                            <li className='nav-item'>
-                                <button className="btn btn-outline-info" onClick={() => {this.toggleAddLessonView()}}>
-                                    <i className="fa fa-times"></i>
-                                </button>
-                            </li>
+
                         </div>
                         <div className="input-group mt-2 mb-2">
                             <input className='form-control'
@@ -122,21 +121,6 @@ export default class LessonsTabs
                         </div>
                     </div>
                 </div>);
-        }else {
-            return (
-                <div className="nav nav-tabs" id='nav-tab' role='tablist'>
-                    {lessons}
-                    {(this.props.editable)?
-                        <li className='nav-item'>
-                            <button className="btn btn-outline-info" onClick={() => {
-                                this.toggleAddLessonView()
-                            }}>
-                                <i className="fa fa-plus"></i>
-                            </button>
-                        </li>:null
-                    }
-                </div>);
-        }
 
     }
 
@@ -146,9 +130,9 @@ export default class LessonsTabs
                 <ul className="nav nav-tabs">
                     {this.renderLessons()}
                 </ul>
-                <div className='tab-content'>
-                    <Route path='/course/:courseId/module/:moduleId/lesson/:lessonId' component={LessonEditor}/>
-                </div>
+                {/*<div className='tab-content'>*/}
+                    {/*<Route path='/course/:courseId/module/:moduleId/lesson/:lessonId' component={LessonEditor}/>*/}
+                {/*</div>*/}
             </div>
         );
     }

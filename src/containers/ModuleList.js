@@ -91,8 +91,9 @@ class ModuleList extends React.Component {
                             let active = this.state.selectModuleInd === index ? 'active' : '';
                             return (
                                 <ModuleListItem
-                                    delete={this.deleteModule}
+                                    deleteModule={this.deleteModule}
                                     select={this.selectModuleInd}
+                                    selectModule={this.props.selectModule}
                                     position={index}
                                     active={active}
                                     key={index}

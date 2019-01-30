@@ -20,9 +20,10 @@ export default class ModuleListItem
     render(){
         return(
             <li className={'list-group-item list-group-item-action '+this.props.active}
-                onClick={() => {this.props.select(this.props.position)}}>
+                onClick={() => {this.props.select(this.props.position)
+                    this.props.selectModule(this.props.module)}}>
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
-                    <div id="moduleTitle" contentEditable={true} style={{color: 'black'}}>{this.props.title}</div>
+                    <div id="moduleTitle"  style={{color: 'black'}}>{this.props.title}</div>
                 </Link>
 
                     <span className="pull-right">
