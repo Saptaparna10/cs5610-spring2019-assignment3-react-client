@@ -7,17 +7,31 @@ class ModuleList extends React.Component {
 
 
         this.state = {
+            selectModuleInd: 0,
             module: {
                 "id": "",
                 "title": "",
                 "lessons": []
 
             },
-            modules: this.props.modules
+            modules: this.props.modules,
+            courseId: this.props.courseId,
+            course: this.props.course
         };
 
         this.titleChanged = this.titleChanged.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        this.selectModuleInd = this.selectModuleInd.bind(this);
+        this.currModule = this.currModule.bind(this);
+    }
+
+
+    currModule(){
+        this.setState({module: this.props.selectModule});
+    }
+
+    selectModuleInd(moduleIndex){
+        this.setState({selectModuleInd: moduleIndex});
     }
 
     createModule = () => {
@@ -40,15 +54,6 @@ class ModuleList extends React.Component {
         this.state.modules.splice(removeIndex, 1);
     }
 
-    // updateModule = um =>{
-    //
-    // }
-    //
-    // select = pm =>{
-    //     this.state.module = pm
-    // }
-    //
-
     titleChanged = (event) => {
         this.setState(
             {
@@ -65,30 +70,34 @@ class ModuleList extends React.Component {
 
         <div>
 
-                <div className="list-group " id="myList" role="tablist">
-                    <span className="list-group-item list-group-item-action mb-5" style={{borderRadius:7,background:'lightgrey'}}
-                          role="tab">
-                        <form className="form-inline">
-                    <input className="form-control" placeholder="New Module Name"
-                           onChange={this.titleChanged}/>
-                    <i className="btn float-right fa-2x fa fa-plus ml-auto p-0" title="Add"
-                        onClick={this.createModule}></i>
-                    <i className="btn float-right fa-2x fa fa-check ml-auto p-0" aria-hidden="true"
-                       onClick={this.updateModule}>
-                            </i>
-                </form>
-                    </span>
+            <div>
+                    <div className="input-group mb-3">
+                        <input className="form-control"
+                               onChange={this.titleChanged}
+                               placeholder="Module 1.1"/>
+                        <div>
+                            <button onClick={this.createModule}
+                                    className="btn btn-primary btn-block">
+                                <i className="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+            </div>
 
-                </div>
-                <div className="list-group ">
+            <div className="list-group ">
                 {
                     this.state.modules.map(
-                        (module) => {
+                        (module, index) => {
+                            let active = this.state.selectModuleInd === index ? 'active' : '';
                             return (
                                 <ModuleListItem
-                                    selectModule={this.props.selectModule}
-                                    deleteModule={this.deleteModule}
-                                    key={module.id}
+                                    delete={this.deleteModule}
+                                    select={this.selectModuleInd}
+                                    position={index}
+                                    active={active}
+                                    key={index}
+                                    title={module.title}
+                                    courseId={this.state.courseId}
                                     module={module}/>
                             )
                         }

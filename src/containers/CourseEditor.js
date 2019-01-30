@@ -1,7 +1,7 @@
 import React from 'react';
 import CourseService from '../services/CourseService'
 import ModuleList from './ModuleList'
-import LessonTabs from '../components/LessonTabs'
+import LessonTabs from './LessonTabs'
 import TopicPills from '../components/TopicPills'
 import WidgetList from "./WidgetList";
 
@@ -39,13 +39,19 @@ export default class CourseEditor
                     <div className="col-md-4 bg-dark longcol">
                             <ModuleList
                                 selectModule={this.selectModule}
-                                modules={this.state.course.modules}/>
+                                modules={this.state.course.modules}
+                                course={this.state.course}
+                                courseId={this.state.course.id}
+                            />
 
                     </div>
-                        <div className="col-8">
+                        <div className="col-8 container-fluid">
                             <div>&nbsp;</div>
                             <LessonTabs
-                                    lessons={this.state.module.lessons}/>
+                                    lessons={this.state.module.lessons}
+                                    moduleid={this.state.module.id}
+                                    courseId={this.state.course.id}
+                            />
                             <TopicPills/>
                             <div className="row">
                                 <div className="col-sm-9"></div>
