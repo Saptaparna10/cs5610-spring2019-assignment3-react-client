@@ -13,12 +13,16 @@ class CourseService {
         this.courses.push(course)
         return this.courses
     }
+
     findCourseById = courseId =>
-        this.courses = this.courses.find(
-            course => course.id === courseId
+        this.course = this.courses.find(
+            course => course.id == courseId
         )
+
+
     findAllCourses = () =>
         this.courses;
+
     deleteCourse = deleteCourse =>
         this.courses = this.courses.filter(
             course => course.id !== deleteCourse.id
