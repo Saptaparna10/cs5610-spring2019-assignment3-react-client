@@ -17,7 +17,7 @@ export default class CourseCard extends React.Component {
                         Created: {this.props.course.created}
                     </p>
 
-                        <button className="btn btn-danger btn-block">
+                        <button className="btn btn-danger btn-block" onClick={() => {this.props.delete(this.props.course)}}>
                             <i className='fa fa-trash'></i>
                         </button>
                 </div>

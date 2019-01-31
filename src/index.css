@@ -49,9 +49,33 @@ h2 {
 }
 
 .longcol {
-  height: 1000px;
+  height: 1125px;
 }
 
 .modulerow {
   background-color: lightgray;
+}
+
+.widgetborder {
+  border-style: groove;
+  border-top:    1px solid dimgrey;
+  border-right:  1px solid dimgrey;
+  border-left: 1px solid dimgrey;
+  border-bottom: 0.5px solid lightgray;
+}
+
+@media (max-width:480px) {
+  .dropdown-menu {
+    width:90%;
+    white-space:normal;
+  }
+}
+
+.right {
+  text-align-all: end;
+  background-color: #61dafb;
+}
+
+.modules {
+  color: red
 }

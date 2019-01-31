@@ -1,4 +1,5 @@
 import courses from '../resources/courses.json'
+
 class CourseService {
     constructor() {
         this.courses = courses;
@@ -9,6 +10,10 @@ class CourseService {
                 id: (new Date()).getTime(),
                 title: 'New Course'
             }
+        }
+        if(course.id === null) {
+            course.id =
+            course = (new Date()).getTime()
         }
         this.courses.push(course)
         return this.courses

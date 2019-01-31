@@ -11,6 +11,9 @@ class CourseTable extends React.Component {
         this.courseService = new CourseService();
         this.renderView = this.renderView.bind(this);
         this.toggleView = this.toggleView.bind(this);
+        this.createCourse = this.createCourse.bind(this);
+        this.deleteCourse = this.deleteCourse.bind(this);
+        this.titleChanged = this.titleChanged.bind(this);
         //this.state = {view: 'list', course: {}, courses: this.state.courses, sidebarOpen: false};
         this.state = {
             courses: this.courseService.findAllCourses(),
@@ -19,11 +22,32 @@ class CourseTable extends React.Component {
         }
     }
 
+    titleChanged(event){
+        this.setState({
+            course: {title: event.target.value}
+        });
+    }
+
+
+    createCourse(){
+        const courses = this.courseService.addCourse(this.state.course);
+        this.setState({courses: courses});
+    }
+
+    deleteCourse(course){
+        const courses = this.courseService.deleteCourse(course);
+        this.setState({courses: courses});
+
+    }
+
     toggleView(){
-        if(this.state.view === 'list')
-            this.setState({view: 'tabs'});
+        if(this.state.view === 'list') {
+            this.setState({view: 'tabs',
+            courses: this.state.courses});
+        }
         else
-            this.setState({view: 'list'});
+            this.setState({view: 'list',
+                courses: this.state.courses});
     }
 
 
@@ -60,7 +84,7 @@ class CourseTable extends React.Component {
                     </tbody>
                 </table>
                     <div>
-                    <CourseGrid/>
+                    <CourseGrid courses={this.state.courses}/>
                     </div>
                 </div>
             )
@@ -70,7 +94,7 @@ class CourseTable extends React.Component {
     renderCourseRow(){
         var courses = this.state.courses.map(
             (course, index) => {
-                 return <CourseRow key={index} course={course}  />
+                 return <CourseRow key={index} course={course}  delete={this.deleteCourse}/>
             }
         )
 
@@ -87,12 +111,12 @@ class CourseTable extends React.Component {
                     <tr>
                         <th><i className='fa fa-bars'></i></th>
                         <th width="20%"><h4>Course Manager</h4></th>
-                        <th width="60%"><input
+                        <th width="60%"><input onChange={this.titleChanged}
                                                className="form-control"
                                                id="titleFld"
                                                placeholder="cs101"/></th>
                             <th width="70%" className='pull-right'>
-                                <button
+                                <button onClick={this.createCourse}
                                         className="btn btn-primary btn-block"
                                         id="addBtn">
                                     <i className='fa fa-plus'></i>

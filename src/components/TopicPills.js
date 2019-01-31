@@ -35,18 +35,6 @@ export default class TopicPills extends React.Component{
         }
     }
 
-    // componentDidMount() {
-    //     this.setLessonId(this.props.lessonId);
-    //     this.findAllTopicsForLesson(this.props.lessonId, this.props.moduleId, this.props.courseId);
-    // }
-
-    // componentWillReceiveProps(newProps){
-    //     this.setCourseId(newProps.courseId);
-    //     this.setModuleId(newProps.moduleId);
-    //     this.setLessonId(newProps.lessonId);
-    //     this.findAllTopicsForLesson(newProps.lessonId, newProps.moduleId, newProps.courseId);
-    // }
-
     setModuleId(moduleId){
         this.setState({moduleId: moduleId});
     }
@@ -79,17 +67,20 @@ export default class TopicPills extends React.Component{
     }
 
     createTopic(){
-        // this.topicService.createTopic(this.state.lessonId, this.state.moduleId, this.state.courseId, this.state.topic)
-        //     .then(() => {
-        //         this.findAllTopicsForLesson(this.state.lessonId,this.state.moduleId,this.state.courseId);
-        //     });
+        this.setState(
+            {
+                topics: [
+                    ...this.state.topics,
+                    this.state.topic
+                ]
+            }
+        )
     }
 
-    deleteTopic(topicId) {
-        // this.topicService.deleteTopic(topicId)
-        //     .then(() => {
-        //         this.findAllTopicsForLesson(this.state.lessonId,this.state.moduleId,this.state.courseId);
-        //     });
+    deleteTopic(topic) {
+        var removeIndex = this.state.topics.map(function(item) { return item.title; }).indexOf(topic.title);
+
+        this.state.topics.splice(removeIndex, 1);
     }
 
     renderTopics() {
@@ -102,13 +93,32 @@ export default class TopicPills extends React.Component{
                         onClick={() => this.selectTopic(i)}
                         key={i}>
                         <a className={`nav-link ${active}`}>
-                            <div style={{color: 'black'}}>{topic.title}</div>
-                                <i className='fa fa-times ml-2' onClick={() => this.deleteTopic(topic.id)}/>
+                            {topic.title}
+                                <i className='fa fa-times ml-2' onClick={() => this.deleteTopic(topic)}/>
                         </a>
                     </li>
                 </Link>
             )
         });
+
+        return (
+                <div className='container-fluid'>
+                    <div className='row'>
+                        {topics}
+                        <div className="input-group mb-3">
+                            <input className='form-control'
+                                   onChange={this.titleChanged}
+                                   placeholder='Topic'/>
+                            <div>
+                                <button className='btn btn-primary'
+                                        onClick={this.createTopic}>
+                                    <i className="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>);
+
 
         return (
             <div className='container-fluid'>
@@ -133,7 +143,7 @@ export default class TopicPills extends React.Component{
     render() {
         return(
             <div>
-                <ul className="nav nav-pills">
+                <ul className="nav nav-pills nav-justified">
                     {this.renderTopics()}
                 </ul>
             </div>

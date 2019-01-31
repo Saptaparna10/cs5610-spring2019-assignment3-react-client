@@ -2,26 +2,6 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import LessonTabItem from '../components/LessonTabItem'
 
-// const LessonTabs = ({lessons}) =>
-//     <ul className="nav nav-tabs">
-//         {
-//             lessons.map(lesson =>
-//                 <li className='nav-item'>
-//                     <div className='col-sm-12'>
-//                         <Link to={`/course`}>
-//                             <a className={'nav-link '}>
-//                                 {lesson.title}
-//
-//                                 <i className="fa fa-times ml-2"/>
-//                             </a>
-//                         </Link>
-//                     </div>
-//                 </li>
-//             )
-//         }
-//     </ul>
-// export default LessonTabs
-
 export default class LessonsTabs
     extends React.Component{
     constructor(props){
@@ -109,7 +89,7 @@ export default class LessonsTabs
                             {lessons}
 
                         </div>
-                        <div className="input-group mt-2 mb-2">
+                        <div className="input-group mb-3">
                             <input className='form-control'
                                    onChange={this.setLessonTitle}
                                    placeholder='Lesson Name'/>
@@ -127,12 +107,9 @@ export default class LessonsTabs
     render() {
         return (
             <div className='container-fluid'>
-                <ul className="nav nav-tabs">
+                <ul className="nav nav-tabs justify-content-end">
                     {this.renderLessons()}
                 </ul>
-                {/*<div className='tab-content'>*/}
-                    {/*<Route path='/course/:courseId/module/:moduleId/lesson/:lessonId' component={LessonEditor}/>*/}
-                {/*</div>*/}
             </div>
         );
     }

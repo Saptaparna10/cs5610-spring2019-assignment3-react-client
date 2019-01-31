@@ -68,7 +68,7 @@ class ModuleList extends React.Component {
     render() {
         return(
 
-        <div>
+        <div >
 
             <div>
                     <div className="input-group mb-3">
@@ -84,7 +84,7 @@ class ModuleList extends React.Component {
                     </div>
             </div>
 
-            <div className="list-group ">
+            <div className="list-group">
                 {
                     this.state.modules.map(
                         (module, index) => {

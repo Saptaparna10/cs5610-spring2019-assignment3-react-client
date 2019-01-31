@@ -1,12 +1,12 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import CourseService from "../services/CourseService";
 
 export default class CourseRow extends React.Component{
 
     constructor(props){
         super(props);
     }
+
 
     render(){
         return(
@@ -18,7 +18,7 @@ export default class CourseRow extends React.Component{
                 </td>
                 <td>me</td>
                 <td>6:45 PM</td>
-                <td><button className="btn btn-danger">
+                <td><button className="btn btn-danger" onClick={() => {this.props.delete(this.props.course)}}>
                     <i className="fa fa-trash"></i>
                 </button></td>
             </tr>

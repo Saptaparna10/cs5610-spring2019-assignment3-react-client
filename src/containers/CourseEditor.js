@@ -66,6 +66,7 @@ export default class CourseEditor
                                     courseId={this.state.course.id}
                                     selectLesson={this.selectLesson}
                             />
+                            <div>&nbsp;</div>
                             <TopicPills
                                 courseId={this.state.course.id}
                                 moduleId={this.state.module.id}
@@ -74,14 +75,18 @@ export default class CourseEditor
                                 topics={this.state.lesson.topics}
                                 selectTopic={this.selectTopic}
                             />
+                            <div>&nbsp;</div>
 
-                            <div className="row">
-                                <div className="col-sm-9"></div>
-                                <div className="col-sm-1">
-                                    <button className="btn btn-success">Save</button>
+                            <div className="row ">
+                                <div className="col-md-8"></div>
+
+                                <div className="col-md-4 text-right">
+                                        <button className="btn btn-success">Save</button>
+                                        <i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>
+                                        Preview
                                 </div>
-                                <div className="col-sm-2">
-                                    <i className="fa fa-toggle-on" aria-hidden="true">Preview</i>
+                                <div>
+                                    &nbsp;
                                 </div>
 
                             </div>

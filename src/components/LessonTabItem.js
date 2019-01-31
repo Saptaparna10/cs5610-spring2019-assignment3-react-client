@@ -8,11 +8,12 @@ export default class LessonTabItem extends React.Component{
 
     render(){
         return (
-            <li className='nav-item'
+
+            <li className='nav-item '
                 onClick={() => {this.props.select(this.props.position)
-                                this.props.selectLesson(this.props.lesson)}}
+                                }}
                 key={this.props.position}>
-                <div className='col-sm-12'>
+
                     <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lesson.id}`}>
                         <a className={'nav-link '+this.props.active}>
                             {this.props.lesson.title}
@@ -23,8 +24,7 @@ export default class LessonTabItem extends React.Component{
 
                         </a>
                     </Link>
-                </div>
             </li>
-        )
+        );
     }
 }

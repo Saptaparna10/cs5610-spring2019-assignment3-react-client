@@ -7,6 +7,8 @@ import css from './index.css';
 
 
 ReactDOM.render(
-    <CourseManagerApp/>,
+    <div className="container-fluid">
+        <CourseManagerApp/>
+    </div>,
     document.getElementById('root')
 );
