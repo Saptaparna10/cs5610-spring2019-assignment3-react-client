@@ -11,9 +11,8 @@ class CourseService {
                 title: 'New Course'
             }
         }
-        if(course.id === null) {
-            course.id =
-            course = (new Date()).getTime()
+        if(course !== null && course.id === null) {
+            course.id = (new Date()).getTime()
         }
         this.courses.push(course)
         return this.courses

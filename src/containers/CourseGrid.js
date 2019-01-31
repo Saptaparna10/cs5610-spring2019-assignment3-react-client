@@ -8,18 +8,11 @@ class CourseTable extends React.Component {
         super(props);
         this.courseService = new CourseService();
         this.renderView = this.renderView.bind(this);
-        this.deleteCourse = this.deleteCourse.bind(this);
         this.state = {
             courses: this.props.courses,
             view: 'tabs',
             course: {}
         }
-    }
-
-
-    deleteCourse(course){
-        const courses = this.courseService.deleteCourse(course);
-        this.setState({courses: courses});
     }
 
     renderView(){
@@ -32,15 +25,28 @@ class CourseTable extends React.Component {
 
 
     renderCourseRow(){
-        var courses = this.state.courses.map(
-            (course, index) => {
-                return <CourseCard key={index} course={course} delete={this.deleteCourse}/>
-            }
-        )
+        return (
+            <div className="card-deck">
+                {
+                    this.props.courses.map((course, index) =>
+                        <CourseCard key={index} course={course} delete={this.props.deleteCourse}/>
+                    )
+                }
 
-        return(
-            courses
-        )
+            </div>
+
+            );
+
+
+        {/*var courses = this.props.courses.map(*/}
+            // (course, index) => {
+            //     return <CourseCard key={index} course={course} delete={this.props.deleteCourse}/>
+            // }
+        {/*)*/}
+
+        {/*return(*/}
+            {/*courses*/}
+        {/*)*/}
     }
 
     render() {
