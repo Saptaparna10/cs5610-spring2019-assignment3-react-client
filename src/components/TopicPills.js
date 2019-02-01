@@ -105,7 +105,7 @@ export default class TopicPills extends React.Component{
                 <div className='container-fluid'>
                     <div className='row'>
                         {topics}
-                        <div className="input-group mb-3">
+                        <div className="input-group input-group mb-3">
                             <input className='form-control'
                                    onChange={this.titleChanged}
                                    placeholder='Topic'/>
@@ -123,7 +123,6 @@ export default class TopicPills extends React.Component{
         return (
             <div className='container-fluid'>
                 <div className='row'>
-
                     <div className="input-group mt-2 mb-2">
                         <input className='form-control'
                                onChange={this.titleChanged}

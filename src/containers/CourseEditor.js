@@ -4,6 +4,7 @@ import ModuleList from './ModuleList'
 import LessonTabs from './LessonTabs'
 import TopicPills from '../components/TopicPills'
 import WidgetList from "./WidgetList";
+import {Link} from "react-router-dom";
 
 export default class CourseEditor
     extends React.Component{
@@ -25,10 +26,12 @@ export default class CourseEditor
     }
 
 
-    selectModule = module =>
+    selectModule = module => {
+        console.log(module)
         this.setState({
             module: module
         })
+    }
 
     selectLesson = lesson =>
         this.setState({
@@ -42,14 +45,15 @@ export default class CourseEditor
 
     render(){
         return (
-            <div className="container-fluid">
+            <div>
                 <div className="row bg-dark">
-                    <div>
-                        <h2>Course Editor: {this.state.course.title}</h2>
-                    </div>
+
+                    <h2> <Link to={`/courses`}>
+                        <i className="fa fa-times"  aria-hidden="true"></i>
+                    </Link> Course Editor: {this.state.course.title}</h2>
                 </div>
                 <div className="row">
-                    <div className="col-md-4 bg-dark longcol">
+                    <div className="col-md-4 bg-dark longcol d-none d-md-block ">
                             <ModuleList
                                 modules={this.state.course.modules}
                                 course={this.state.course}
@@ -58,7 +62,7 @@ export default class CourseEditor
                             />
 
                     </div>
-                        <div className="col-8 container-fluid">
+                        <div className="col-md-8">
                             <div>&nbsp;</div>
                             <LessonTabs
                                     lessons={this.state.module.lessons}
@@ -77,18 +81,17 @@ export default class CourseEditor
                             />
                             <div>&nbsp;</div>
 
-                            <div className="row ">
-                                <div className="col-md-8"></div>
+                            <div className="row">
 
-                                <div className="col-md-4 text-right">
+                                <div className="col text-right">
                                         <button className="btn btn-success">Save</button>
                                         <i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>
                                         Preview
                                 </div>
-                                <div>
-                                    &nbsp;
-                                </div>
 
+                            </div>
+                            <div>
+                                &nbsp;
                             </div>
                             <WidgetList/>
                         </div>

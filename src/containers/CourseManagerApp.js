@@ -70,17 +70,17 @@ export default class CourseManager
 
     render(){
         return (
-            <div className='container-fluid'>
+            <div className='table-responsive'>
                     <table className="table table-striped table-dark">
                         <thead>
                         <tr>
                             <th><i className='fa fa-bars'></i></th>
-                            <th width="20%"><h4>Course Manager</h4></th>
-                            <th width="60%"><input onChange={this.titleChanged}
+                            <th className="pull-left"><h4>Course Manager</h4></th>
+                            <th><input onChange={this.titleChanged}
                                                    className="form-control"
                                                    id="titleFld"
                                                    placeholder="cs101"/></th>
-                            <th width="70%" className='pull-right'>
+                            <th className='pull-right'>
                                 <button onClick={this.addCourse}
                                         className="btn btn-primary btn-block"
                                         id="addBtn">

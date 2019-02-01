@@ -25,8 +25,8 @@ class CourseTable extends React.Component {
                     <tr>
                         <th>&nbsp;</th>
                         <th>Title</th>
-                        <th>Owned By</th>
-                        <th>Last Modified</th>
+                        <th className='d-none d-sm-table-cell'>Owned By</th>
+                        <th className='d-none d-sm-table-cell'>Last Modified</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>

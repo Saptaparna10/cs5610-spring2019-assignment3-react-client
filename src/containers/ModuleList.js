@@ -84,7 +84,7 @@ class ModuleList extends React.Component {
                     </div>
             </div>
 
-            <div className="list-group">
+            <ul className="nav flex-column nav-pills">
                 {
                     this.state.modules.map(
                         (module, index) => {
@@ -104,7 +104,8 @@ class ModuleList extends React.Component {
                         }
                     )
                 }
-                </div>
+            </ul>
+
                 <div>
                     &nbsp;
                 </div>

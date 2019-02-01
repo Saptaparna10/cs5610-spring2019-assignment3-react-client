@@ -24,7 +24,7 @@ class CourseTable extends React.Component {
     }
 
 
-    renderCourseRow(){
+    renderCourseRow() {
         return (
             <div className="card-deck">
                 {
@@ -35,23 +35,13 @@ class CourseTable extends React.Component {
 
             </div>
 
-            );
-
-
-        {/*var courses = this.props.courses.map(*/}
-            // (course, index) => {
-            //     return <CourseCard key={index} course={course} delete={this.props.deleteCourse}/>
-            // }
-        {/*)*/}
-
-        {/*return(*/}
-            {/*courses*/}
-        {/*)*/}
+        );
     }
+
 
     render() {
         return (
-            <div className='heading-bar'>
+            <div>
                 {this.renderView()}
             </div>
 

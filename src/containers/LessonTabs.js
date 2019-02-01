@@ -8,7 +8,7 @@ export default class LessonsTabs
         super(props);
         this.state={
             selectedLesson: 0,
-            // module: this.props.module,
+            module: this.props.module,
             moduleId: this.props.moduleId,
             courseId: this.props.courseId,
             lesson: {title: ''},
@@ -67,13 +67,13 @@ export default class LessonsTabs
     }
 
     renderLessons(){
-        let lessons = this.state.lessons.map((lesson, index) => {
-            let active = this.state.selectedLesson === index ? 'active' : '';
+        let lessons = this.props.lessons.map((lesson, index) => {
+            let active = this.props.selectedLesson === index ? 'active' : '';
             return (
                 <LessonTabItem key={index}
                                position={index}
-                               moduleId={this.state.moduleId}
-                               courseId={this.state.courseId}
+                               moduleId={this.props.moduleId}
+                               courseId={this.props.courseId}
                                active={active}
                                lesson={lesson}
                                select={this.selectLesson}
@@ -106,11 +106,9 @@ export default class LessonsTabs
 
     render() {
         return (
-            <div className='container-fluid'>
                 <ul className="nav nav-tabs justify-content-end">
                     {this.renderLessons()}
                 </ul>
-            </div>
         );
     }
 }
