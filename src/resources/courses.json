@@ -1,44 +1,86 @@
 [
     {
       "id": "123",
-      "title": "Javascript",
+      "title": "Webdev Grad",
       "modules": [
         {
           "id": "123",
-          "title": "Module 1 1",
+          "title": " Front End",
           "lessons": [
             {
               "id": "123",
-              "title": "Lesson 1 1 1",
+              "title": " Static",
               "topics": [
-                {"title": "Topic 1 1 1 1"}
+                {
+                  "id": "123",
+                  "title": "HTML"
+                },
+                {
+                  "id": "234",
+                  "title": "CSS"
+                }
               ]
             },
             {
               "id": "234",
-              "title": "Lesson 1 1 2",
+              "title": "Dynamic",
               "topics": [
-                {"title": "Topic 1 1 2 1"}
+                {
+                  "id": "123",
+                  "title": "Javascript"
+                }
               ]
             }
           ]
         },
         {
           "id": "234",
-          "title": "Module 1 2",
+          "title": "Back End",
           "lessons": [
             {
-              "id": "345",
-              "title": "Lesson 1 2 1",
+              "id": "123",
+              "title": "Java",
               "topics": [
-                {"title": "Topic 1 2 1 1"}
+                {
+                  "id": "123",
+                  "title": "Collections"
+                }
               ]
             },
             {
-              "id": "456",
-              "title": "Lesson 1 2 2",
+              "id": "234",
+              "title": "NodeJS",
               "topics": [
-                {"title": "Topic 1 2 2 1"}
+                {
+                  "id": "123",
+                  "title": "Express"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "345",
+          "title": "DataBase",
+          "lessons": [
+            {
+              "id": "123",
+              "title": "RDBMS",
+              "topics": [
+                {
+                  "id": "123",
+                  "title": "SQL"
+                }
+              ]
+            },
+            {
+              "id": "234",
+              "title": "NO SQL",
+              "topics": [
+                {
+                  "id": "123",
+                  "title": "Mongo"
+                }
               ]
             }
           ]
@@ -47,47 +89,62 @@
     },
 
 
-
   {
     "id": "234",
-    "title": "Jquery",
+    "title": "DBMS Grad",
     "modules": [
       {
         "id": "123",
-        "title": "Module 2 1",
+        "title": "RDBMS",
         "lessons": [
           {
             "id": "123",
-            "title": "Lesson 2 1 1",
+            "title": "SQL",
             "topics": [
-              {"title": "Topic 2 1 1 1"}
+              {
+                "id": "123",
+                "title": "Joins"
+              },
+              {
+                "id": "234",
+                "title": "Group by"
+              }
             ]
           },
           {
             "id": "234",
-            "title": "Lesson 2 1 2",
+            "title": "Transactions",
             "topics": [
-              {"title": "Topic 2 1 2 1"}
+              {
+                "id": "123",
+                "title": "ACID"
+              }
             ]
           }
         ]
       },
       {
         "id": "234",
-        "title": "Module 2 2",
+        "title": "No SQL",
         "lessons": [
           {
-            "id": "345",
-            "title": "Lesson 1 2 1",
+            "id": "123",
+            "title": "Mongo",
             "topics": [
-              {"title": "Topic 1 2 1 1"}
+              {
+                "id": "123",
+                "title": "mongo"
+              }
             ]
           },
           {
-            "id": "456",
-            "title": "Lesson 1 2 2",
+            "id": "234",
+            "title": "Postgre",
             "topics": [
-              {"title": "Topic 1 2 2 1"}
+              {
+                "id": "123",
+                "title": "Postgre"
+              }
             ]
           }
         ]
@@ -96,143 +153,150 @@
   },
   {
     "id": "345",
-    "title": "React",
+    "title": "Webdev Undergrad",
     "modules": [
       {
         "id": "123",
-        "title": "Module 1 1",
+        "title": " Front End",
         "lessons": [
           {
             "id": "123",
-            "title": "Lesson 1 1 1",
+            "title": " Static",
             "topics": [
-              {"title": "Topic 1 1 1 1"}
+              {
+                "id": "123",
+                "title": "HTML"
+              },
+              {
+                "id": "234",
+                "title": "CSS"
+              }
             ]
           },
           {
             "id": "234",
-            "title": "Lesson 1 1 2",
+            "title": "Dynamic",
             "topics": [
-              {"title": "Topic 1 1 2 1"}
+              {
+                "id": "123",
+                "title": "Javascript"
+              }
             ]
           }
         ]
       },
       {
         "id": "234",
-        "title": "Module 1 2",
+        "title": "Back End",
         "lessons": [
           {
-            "id": "345",
-            "title": "Lesson 1 2 1",
+            "id": "123",
+            "title": "Java",
             "topics": [
-              {"title": "Topic 1 2 1 1"}
+              {
+                "id": "123",
+                "title": "Collections"
+              }
             ]
           },
           {
-            "id": "456",
-            "title": "Lesson 1 2 2",
+            "id": "234",
+            "title": "NodeJS",
             "topics": [
-              {"title": "Topic 1 2 2 1"}
+              {
+                "id": "123",
+                "title": "Express"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "345",
+        "title": "DataBase",
+        "lessons": [
+          {
+            "id": "123",
+            "title": "RDBMS",
+            "topics": [
+              {
+                "id": "123",
+                "title": "SQL"
+              }
+            ]
+          },
+          {
+            "id": "234",
+            "title": "NO SQL",
+            "topics": [
+              {
+                "id": "123",
+                "title": "Mongo"
+              }
             ]
           }
         ]
       }
     ]
   },
+
+
   {
     "id": "456",
-    "title": "Redux",
+    "title": "DBMS Underrad",
     "modules": [
       {
         "id": "123",
-        "title": "Module 1 1",
+        "title": "RDBMS",
         "lessons": [
           {
             "id": "123",
-            "title": "Lesson 1 1 1",
+            "title": "SQL",
             "topics": [
-              {"title": "Topic 1 1 1 1"}
+              {
+                "id": "123",
+                "title": "Joins"
+              },
+              {
+                "id": "234",
+                "title": "Group by"
+              }
             ]
           },
           {
             "id": "234",
-            "title": "Lesson 1 1 2",
+            "title": "Transactions",
             "topics": [
-              {"title": "Topic 1 1 2 1"}
+              {
+                "id": "123",
+                "title": "ACID"
+              }
             ]
           }
         ]
       },
       {
         "id": "234",
-        "title": "Module 1 2",
-        "lessons": [
-          {
-            "id": "345",
-            "title": "Lesson 1 2 1",
-            "topics": [
-              {"title": "Topic 1 2 1 1"}
-            ]
-          },
-          {
-            "id": "456",
-            "title": "Lesson 1 2 2",
-            "topics": [
-              {"title": "Topic 1 2 2 1"}
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "567",
-    "title": "Angular",
-    "modules": [
-      {
-        "id": "123",
-        "title": "Module 1 1",
+        "title": "No SQL",
         "lessons": [
           {
             "id": "123",
-            "title": "Lesson 1 1 1",
+            "title": "Mongo",
             "topics": [
-              {"title": "Topic 1 1 1 1"}
+              {
+                "id": "123",
+                "title": "mongo"
+              }
             ]
           },
           {
             "id": "234",
-            "title": "Lesson 1 1 2",
+            "title": "Postgre",
             "topics": [
-              {"title": "Topic 1 1 2 1"}
-            ]
-          }
-        ]
-      },
-      {
-        "id": "234",
-        "title": "Module 1 2",
-        "lessons": [
-          {
-            "id": "345",
-            "title": "Lesson 1 2 1",
-            "topics": [
-              {"title": "Topic 1 2 1 1"}
-            ]
-          },
-          {
-            "id": "456",
-            "title": "Lesson 1 2 2",
-            "topics": [
-              {"title": "Topic 1 2 2 1"}
-            ]
-          },
-          {
-            "id": "567",
-            "title": "Lesson 1 2 3",
-            "topics": [
-              {"title": "Topic 1 2 1 3"}
+              {
+                "id": "123",
+                "title": "Postgre"
+              }
             ]
           }
         ]

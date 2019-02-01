@@ -28,5 +28,11 @@ class CourseService {
         this.courses = this.courses.filter(
             course => course.id !== deleteCourse.id
         )
+
+    updateCourse = updateCourse => {
+        var foundIndex =  this.courses.findIndex(x => x.id == updateCourse.id);
+        this.courses[foundIndex] = updateCourse;
+        return this.coursesl
+    }
 }
 export default CourseService

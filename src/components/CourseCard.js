@@ -13,7 +13,8 @@ export default class CourseCard extends React.Component {
                      src="https://picsum.photos/300/200"/>
                 <div className="card-body">
                     <h5 className="card-title">
-                        {this.props.course.title}
+                        <Link to={`/course/${this.props.course.id}`}>
+                            {this.props.course.title}</Link>
                     </h5>
                     <p className="card-text">
                         card texts

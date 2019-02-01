@@ -15,12 +15,9 @@ export default class LessonsTabs
             lessons: this.props.lessons
         }
 
-        this.selectLesson = this.selectLesson.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
-        this.setLessonTitle = this.setLessonTitle.bind(this);
-        this.createLesson = this.createLesson.bind(this);
-        this.deleteLesson = this.deleteLesson.bind(this);
+        this.select = this.select.bind(this);
     }
 
     setModuleId(moduleId){
@@ -31,44 +28,16 @@ export default class LessonsTabs
         this.setState({courseId: courseId});
     }
 
-    setLessonTitle(event){
-        this.setState({
-            lesson: {
-                title: event.target.value
-            }
-        });
-    }
 
-    selectLesson(lessonIndex){
+    select(lessonIndex){
         this.setState({selectedLesson: lessonIndex});
     }
 
 
-    createLesson(){
-
-        this.setState(
-            {
-                lessons: [
-                    ...this.state.lessons,
-                    this.state.lesson
-                ]
-            }
-        )
-    }
-
-    deleteLesson(lesson){
-        // this.lessonService.deleteLesson(lessonId)
-        //     .then(() => {
-        //         this.findAllLessonsForModule(this.state.moduleId, this.state.courseId)
-        //     });
-        var removeIndex = this.state.lessons.map(function(item) { return item.title; }).indexOf(lesson.title);
-
-        this.state.lessons.splice(removeIndex, 1);
-    }
 
     renderLessons(){
         let lessons = this.props.lessons.map((lesson, index) => {
-            let active = this.props.selectedLesson === index ? 'active' : '';
+            let active = this.state.selectedLesson === index ? 'active' : '';
             return (
                 <LessonTabItem key={index}
                                position={index}
@@ -76,37 +45,36 @@ export default class LessonsTabs
                                courseId={this.props.courseId}
                                active={active}
                                lesson={lesson}
-                               select={this.selectLesson}
-                               delete={this.deleteLesson}
+                               select={this.select}
+                               selectLesson={this.props.selectLesson}
+                               deleteLesson={this.props.deleteLesson}
                 />
             )
         });
 
             return (
-                <div className='container-fluid'>
-                    <div className='row'>
-                        <div className="nav nav-tabs" id='nav-tab' role='tablist'>
+                <div>
+                        <div className="nav nav-item">
                             {lessons}
 
                         </div>
                         <div className="input-group mb-3">
                             <input className='form-control'
-                                   onChange={this.setLessonTitle}
+                                   onChange={this.props.titleChanged}
                                    placeholder='Lesson Name'/>
                             <div>
-                                <button onClick={this.createLesson} className="btn btn-primary btn-block">
+                                <button onClick={this.props.createLesson} className="btn btn-primary btn-block">
                                     <i className="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
                 </div>);
 
     }
 
     render() {
         return (
-                <ul className="nav nav-tabs justify-content-end">
+                <ul className="nav nav-tabs flex-column">
                     {this.renderLessons()}
                 </ul>
         );

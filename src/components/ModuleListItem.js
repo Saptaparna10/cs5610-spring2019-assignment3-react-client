@@ -9,13 +9,12 @@ export default class ModuleListItem
 
     render(){
         return(
-            <li className={'list-group-item list-group-item-dark'+this.props.active}
+            <li className={'list-group-item list-group-item-dark '+this.props.active}
                 onClick={() => {this.props.select(this.props.position)
                     this.props.selectModule(this.props.module)}}>
-                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
-                    {/*<div id="moduleTitle"  style={{color: 'black'}}>{this.props.title}</div>*/}
-                    {this.props.title}
-                </Link>
+                {/*<Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>*/}
+                    {this.props.module.title}
+                {/*</Link>*/}
 
                     <span className="pull-right">
                         <button className='btn bg-transparent' onClick={() => {

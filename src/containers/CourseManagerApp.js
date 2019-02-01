@@ -4,9 +4,6 @@ import CourseService from '../services/CourseService'
 import CourseEditor from './CourseEditor';
 import CourseGrid from './CourseGrid'
 
-
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
-
 export default class CourseManager
     extends Component{
 
@@ -17,6 +14,7 @@ export default class CourseManager
         this.titleChanged = this.titleChanged.bind(this);
         this.addCourse = this.addCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
+        this.updateCourse = this.updateCourse.bind(this);
         this.renderView = this.renderView.bind(this);
         this.state = {
             courses: this.courseService.findAllCourses(),
@@ -25,10 +23,17 @@ export default class CourseManager
     }
 
 
-    titleChanged(event){
-        this.setState({
-            course: {title: event.target.value}
-        });
+    titleChanged(event) {
+        this.setState(
+            {
+                course: {
+                    id: (new Date()).getTime(),
+                    title: event.target.value,
+                    modules: []
+                }
+
+            }
+        );
     }
 
     toggleView(){
@@ -48,6 +53,11 @@ export default class CourseManager
         const courses = this.courseService.deleteCourse(course);
         this.setState({courses: courses});
 
+    }
+
+    updateCourse(course){
+        const courses = this.courseService.updateCourse(course);
+        this.setState({courses: courses});
     }
 
     renderView(){
@@ -75,7 +85,7 @@ export default class CourseManager
                         <thead>
                         <tr>
                             <th><i className='fa fa-bars'></i></th>
-                            <th className="pull-left"><h4>Course Manager</h4></th>
+                            <th className="pull-left"> <a href='#' className='logo'>Course Manager</a></th>
                             <th><input onChange={this.titleChanged}
                                                    className="form-control"
                                                    id="titleFld"
