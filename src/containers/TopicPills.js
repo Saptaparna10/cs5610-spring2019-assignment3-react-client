@@ -87,7 +87,7 @@ export default class TopicPills extends React.Component{
                                 </button>
                             </div>
                             <div>
-                                <button className='btn btn-primary'
+                                <button className='btn btn-secondary'
                                         onClick={this.props.createTopic}>
                                     <i className="fa fa-plus"></i>
                                 </button>
