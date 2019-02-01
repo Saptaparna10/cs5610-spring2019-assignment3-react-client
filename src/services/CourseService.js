@@ -7,8 +7,19 @@ class CourseService {
     addCourse = course => {
         if(course === null) {
             course = {
-                title: 'New Course'
+                id :(new Date()).getTime(),
+                    title:'New Course',
+                    modules:[{
+                    title: '',
+                    lessons: [{
+                        title:'',
+                        topics:[{
+                            title:''
+                        }]
+                    }]
+                }]
             }
+
         }
         course.id = (new Date()).getTime()
         this.courses.push(course)
@@ -29,10 +40,11 @@ class CourseService {
             course => course.id !== deleteCourse.id
         )
 
-    updateCourse = updateCourse => {
-        var foundIndex =  this.courses.findIndex(x => x.id == updateCourse.id);
-        this.courses[foundIndex] = updateCourse;
-        return this.coursesl
+    updateCourse = (selectedCourse, newCourse) => {
+        var foundIndex =  this.courses.findIndex(x => x.id == selectedCourse.id);
+        selectedCourse.title = newCourse.title;
+        this.courses[foundIndex] = selectedCourse;
+        return this.courses
     }
 }
 export default CourseService

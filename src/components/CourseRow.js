@@ -23,11 +23,8 @@ export default class CourseRow extends React.Component{
                 </td>
                 <td className='d-none d-sm-table-cell'>me</td>
                 <td className='d-none d-sm-table-cell'>6:45 PM</td>
-                <td><button className="btn btn-secondary">
-                    <i className="fa fa-pencil" onClick={() =>{
-                        var title = document.getElementById('courseTitle');
-                        title.contentEditable=true;
-                    }}></i>
+                <td className='d-none d-sm-table-cell'><button className="btn btn-secondary" onClick={() =>{this.props.editCourse(this.props.course)}}>
+                    <i className="fa fa-pencil"></i>
                 </button></td>
                 <td><button className="btn btn-danger" onClick={() => {this.props.deleteCourse(this.props.course)}}>
                     <i className="fa fa-trash"></i>

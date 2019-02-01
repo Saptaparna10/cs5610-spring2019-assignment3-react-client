@@ -48,6 +48,7 @@ export default class LessonsTabs
                                select={this.select}
                                selectLesson={this.props.selectLesson}
                                deleteLesson={this.props.deleteLesson}
+                               editLesson={this.props.editLesson}
                 />
             )
         });
@@ -59,14 +60,22 @@ export default class LessonsTabs
 
                         </div>
                         <div className="input-group mb-3">
-                            <input className='form-control'
+                            <input id='lessTitle'
+                                   className='form-control'
                                    onChange={this.props.titleChanged}
                                    placeholder='Lesson Name'/>
                             <div>
-                                <button onClick={this.props.createLesson} className="btn btn-primary btn-block">
+                                <button onClick={this.props.updateLesson}
+                                        className="btn btn-success btn-block">
+                                    <i className="fa fa-check"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button onClick={this.props.createLesson} className="btn btn-secondary btn-block">
                                     <i className="fa fa-plus"></i>
                                 </button>
                             </div>
+
                         </div>
                 </div>);
 

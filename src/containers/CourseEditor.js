@@ -18,28 +18,33 @@ export default class CourseEditor
         const course = this.courseService.findCourseById(courseId)
         this.state = {
             course: course,
-            module: course.modules[0],
+            module: (course.modules.length!=0) ? course.modules[0]: '',
             newModule: '',
-            lesson: course.modules[0].lessons[0],
+            lesson: (course.modules.length!=0 && course.modules[0].lessons.length!=0)?course.modules[0].lessons[0]: '',
             newLesson:'',
-            topic: course.modules[0].lessons[0].topics[0],
+            topic: (course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0)? course.modules[0].lessons[0].topics[0]: '',
             newTopic:''
         }
         this.moduleTitleChanged = this.moduleTitleChanged.bind(this);
         this.selectModule = this.selectModule.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
+        this.editModule = this.editModule.bind(this);
+        this.updateModule = this.updateModule.bind(this);
 
         this.lessonTitleChanged = this.lessonTitleChanged.bind(this);
         this.selectLesson = this.selectLesson.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
+        this.editLesson = this.editLesson.bind(this);
+        this.updateLesson = this.updateLesson.bind(this);
 
         this.topicTitleChanged = this.topicTitleChanged.bind(this);
         this.selectTopic = this.selectTopic.bind(this);
         this.createTopic = this.createTopic.bind(this);
         this.deleteTopic = this.deleteTopic.bind(this);
-
+        this.editTopic = this.editTopic.bind(this);
+        this.updateTopic = this.updateTopic.bind(this);
     }
 
     /** ---------Modules-----------**/
@@ -64,9 +69,9 @@ export default class CourseEditor
     }
 
     createModule = () => {
-
         var course = this.state.course;
         course.modules.push(this.state.newModule);
+        document.getElementById('modTitle').value=''
         this.setState({
             course: course
         })
@@ -75,6 +80,20 @@ export default class CourseEditor
     deleteModule = dm =>{
         var removeIndex = this.state.course.modules.map(function(item) { return item.title; }).indexOf(dm.title);
         this.state.course.modules.splice(removeIndex, 1);
+    }
+
+    editModule(module){
+        var modTitle = document.getElementById('modTitle');
+        modTitle.value= module.title;
+        this.setState({module: module});
+    }
+
+    updateModule(){
+        var moduleInd = this.state.course.modules.findIndex(x => x.id == this.state.module.id)
+        this.state.module.title = this.state.newModule.title
+        this.state.course.modules[moduleInd] = this.state.module
+        document.getElementById('modTitle').value=''
+        this.setState({module: this.state.module});
     }
 
     /** ---------Lessons-----------**/
@@ -97,6 +116,7 @@ export default class CourseEditor
     createLesson(){
         var course = this.state.course;
         this.state.module.lessons.push(this.state.newLesson);
+        document.getElementById('lessTitle').value=''
         this.setState({
             course: course
         })
@@ -105,6 +125,20 @@ export default class CourseEditor
     deleteLesson(lesson){
         var removeIndex = this.state.module.lessons.map(function(item) { return item.title; }).indexOf(lesson.title);
         this.state.module.lessons.splice(removeIndex, 1);
+    }
+
+    editLesson(lesson){
+        var lessTitle = document.getElementById('lessTitle');
+        lessTitle.value= lesson.title;
+        this.setState({lesson: lesson});
+    }
+
+    updateLesson(){
+        var lessInd = this.state.module.lessons.findIndex(x => x.id == this.state.lesson.id)
+        this.state.lesson.title = this.state.newLesson.title
+        this.state.module.lessons[lessInd] = this.state.lesson
+        document.getElementById('lessTitle').value=''
+        this.setState({lesson: this.state.lesson});
     }
 
     /** ---------Topics-----------**/
@@ -124,6 +158,7 @@ export default class CourseEditor
     createTopic(){
         var course = this.state.course;
         this.state.lesson.topics.push(this.state.newTopic);
+        document.getElementById('topTitle').value=''
         this.setState({
             course: course
         })
@@ -132,6 +167,20 @@ export default class CourseEditor
     deleteTopic(topic) {
         var removeIndex = this.state.lesson.topics.map(function(item) { return item.title; }).indexOf(topic.title);
         this.state.lesson.topics.splice(removeIndex, 1);
+    }
+
+    editTopic(topic){
+        var topTitle = document.getElementById('topTitle');
+        topTitle.value= topic.title;
+        this.setState({topic: topic});
+    }
+
+    updateTopic(){
+        var topInd = this.state.lesson.topics.findIndex(x => x.id == this.state.topic.id)
+        this.state.topic.title = this.state.newTopic.title
+        this.state.lesson.topics[topInd] = this.state.topic
+        document.getElementById('topTitle').value=''
+        this.setState({topic: this.state.topic});
     }
 
     /**------------Render--------------**/
@@ -145,6 +194,9 @@ export default class CourseEditor
                     </Link>
                     <a href='#' className='logo'> Course Editor: {this.state.course.title}</a>
                 </div>
+                <div className="row bg-dark">
+                    &nbsp;
+                </div>
                 <div className="row">
                     <div className="col-md-4 bg-dark longcol d-none d-md-block ">
                             <ModuleList
@@ -153,6 +205,8 @@ export default class CourseEditor
                                 titleChanged={this.moduleTitleChanged}
                                 createModule={this.createModule}
                                 deleteModule={this.deleteModule}
+                                editModule={this.editModule}
+                                updateModule={this.updateModule}
                                 modules={this.state.course.modules}
                             />
 
@@ -167,6 +221,8 @@ export default class CourseEditor
                                     titleChanged={this.lessonTitleChanged}
                                     createLesson={this.createLesson}
                                     deleteLesson={this.deleteLesson}
+                                    updateLesson={this.updateLesson}
+                                    editLesson={this.editLesson}
                                     lessons={this.state.module.lessons}
 
                             />
@@ -182,6 +238,8 @@ export default class CourseEditor
                                 titleChanged={this.topicTitleChanged}
                                 createTopic={this.createTopic}
                                 deleteTopic={this.deleteTopic}
+                                updateTopic={this.updateTopic}
+                                editTopic={this.editTopic}
                             />
 
                             <div>&nbsp;</div>

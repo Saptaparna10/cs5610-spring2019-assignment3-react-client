@@ -16,9 +16,12 @@ export default class CourseManager
         this.deleteCourse = this.deleteCourse.bind(this);
         this.updateCourse = this.updateCourse.bind(this);
         this.renderView = this.renderView.bind(this);
+        this.editCourse=this.editCourse.bind(this);
         this.state = {
             courses: this.courseService.findAllCourses(),
-            view: 'list'
+            view: 'list',
+            course: '',
+            newCourse:''
         }
     }
 
@@ -26,11 +29,20 @@ export default class CourseManager
     titleChanged(event) {
         this.setState(
             {
-                course: {
-                    id: (new Date()).getTime(),
+                newCourse:{
+                    id :(new Date()).getTime(),
                     title: event.target.value,
-                    modules: []
+                    modules:[{
+                        title: '',
+                        lessons: [{
+                            title:'',
+                            topics:[{
+                                title:''
+                            }]
+                        }]
+                    }]
                 }
+
 
             }
         );
@@ -45,7 +57,8 @@ export default class CourseManager
     }
 
     addCourse(){
-        const courses = this.courseService.addCourse(this.state.course);
+        const courses = this.courseService.addCourse(this.state.newCourse);
+        document.getElementById('titleFld').value=''
         this.setState({courses: courses});
     }
 
@@ -55,8 +68,15 @@ export default class CourseManager
 
     }
 
-    updateCourse(course){
-        const courses = this.courseService.updateCourse(course);
+    editCourse(course){
+        var courseInput = document.getElementById('titleFld');
+        courseInput.value= course.title;
+        this.setState({course: course});
+    }
+
+    updateCourse(){
+        const courses = this.courseService.updateCourse(this.state.course, this.state.newCourse);
+        document.getElementById('titleFld').value=''
         this.setState({courses: courses});
     }
 
@@ -65,6 +85,7 @@ export default class CourseManager
             return (
                 <CourseTable
                     deleteCourse={this.deleteCourse}
+                    editCourse={this.editCourse}
                     courses={this.state.courses}/>
 
             );
@@ -72,6 +93,7 @@ export default class CourseManager
         else {
             return (
                 <CourseGrid
+                    editCourse={this.editCourse}
                     deleteCourse={this.deleteCourse}
                     courses={this.state.courses}/>
             );
@@ -87,12 +109,19 @@ export default class CourseManager
                             <th><i className='fa fa-bars'></i></th>
                             <th className="pull-left"> <a href='#' className='logo'>Course Manager</a></th>
                             <th><input onChange={this.titleChanged}
-                                                   className="form-control"
+                                                   className="form-control d-none d-sm-table-cell"
                                                    id="titleFld"
                                                    placeholder="cs101"/></th>
+                            <th className='pull-right d-none d-sm-table-cell'>
+                                <button onClick={this.updateCourse}
+                                        className="btn btn-success btn-block"
+                                        id="updateBtn">
+                                    <i className='fa fa-check'></i>
+                                </button>
+                            </th>
                             <th className='pull-right'>
                                 <button onClick={this.addCourse}
-                                        className="btn btn-primary btn-block"
+                                        className="btn btn-primary btn-block d-none d-sm-table-cell"
                                         id="addBtn">
                                     <i className='fa fa-plus'></i>
                                 </button>

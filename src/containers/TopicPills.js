@@ -63,6 +63,9 @@ export default class TopicPills extends React.Component{
                         <a className= {`nav-link ${active}`}>
                                 {topic.title}
                                 <i className='fa fa-times ml-2' onClick={() => {this.props.deleteTopic(topic)}}/>
+                                 <i className="fa fa-pencil ml-2" onClick={() => {
+                                     this.props.editTopic(topic)
+                                }}/>
                             </a>
                         {/*</Link>*/}
                     </li>
@@ -73,9 +76,16 @@ export default class TopicPills extends React.Component{
                     <div className="nav item">
                         {topics}
                         <div className="input-group input-group mb-3">
-                            <input className='form-control'
+                            <input id='topTitle'
+                                   className='form-control'
                                    onChange={this.props.titleChanged}
                                    placeholder='Topic Name'/>
+                            <div>
+                                <button onClick={this.props.updateTopic}
+                                        className="btn btn-success btn-block">
+                                    <i className="fa fa-check"></i>
+                                </button>
+                            </div>
                             <div>
                                 <button className='btn btn-primary'
                                         onClick={this.props.createTopic}>

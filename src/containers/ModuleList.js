@@ -30,13 +30,20 @@ class ModuleList extends React.Component {
 
         <div>
                     <div className="input-group mb-3">
-                        <input className="form-control"
+                        <input id='modTitle'
+                               className="form-control"
                                onChange={this.props.titleChanged}
                                placeholder="Module 1.1"/>
                         <div>
                             <button onClick={this.props.createModule}
                                     className="btn btn-dark btn-block">
                                 <i className="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <button onClick={this.props.updateModule}
+                                    className="btn btn-dark btn-block">
+                                <i className="fa fa-check"></i>
                             </button>
                         </div>
                     </div>
@@ -56,6 +63,7 @@ class ModuleList extends React.Component {
                                     module={module}
                                     selectModule={this.props.selectModule}
                                     deleteModule={this.props.deleteModule}
+                                    editModule={this.props.editModule}
                                     />
                             )
                         }

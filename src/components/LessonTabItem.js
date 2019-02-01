@@ -23,6 +23,10 @@ export default class LessonTabItem extends React.Component{
                                     this.props.deleteLesson(this.props.lesson)
                                 }}/>
 
+                            <i className="fa fa-pencil ml-2" onClick={() => {
+                                this.props.editLesson(this.props.lesson)
+                            }}/>
+
                         </a>
                     {/*</Link>*/}
             </li>

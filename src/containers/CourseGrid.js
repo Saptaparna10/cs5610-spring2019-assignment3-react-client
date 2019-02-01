@@ -26,10 +26,10 @@ class CourseTable extends React.Component {
 
     renderCourseRow() {
         return (
-            <div className="card-deck">
+            <div className="row">
                 {
                     this.props.courses.map((course, index) =>
-                        <CourseCard key={index} course={course} delete={this.props.deleteCourse}/>
+                        <CourseCard key={index} course={course} delete={this.props.deleteCourse} editCourse={this.props.editCourse}/>
                     )
                 }
 

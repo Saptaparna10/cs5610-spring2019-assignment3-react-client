@@ -28,7 +28,7 @@ class CourseTable extends React.Component {
                         <th className='d-none d-sm-table-cell'>Owned By</th>
                         <th className='d-none d-sm-table-cell'>Last Modified</th>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th className='d-none d-sm-table-cell'>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,11 @@ class CourseTable extends React.Component {
     renderCourseRow(){
         var courses = this.props.courses.map(
             (course, index) => {
-                 return <CourseRow key={index} course={course}  deleteCourse={this.props.deleteCourse}/>
+                 return <CourseRow
+                        key={index}
+                        course={course}
+                        deleteCourse={this.props.deleteCourse}
+                        editCourse={this.props.editCourse}/>
             }
         )
 
