@@ -3,6 +3,7 @@ import CourseTable from "./CourseTable";
 import CourseService from '../services/CourseService'
 import CourseEditor from './CourseEditor';
 import CourseGrid from './CourseGrid'
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 export default class CourseManager
     extends Component{

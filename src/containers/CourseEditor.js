@@ -189,7 +189,7 @@ export default class CourseEditor
             <div>
                 <div className="row bg-dark">
 
-                    <Link to={`/courses`}>
+                    <Link to={`/`}>
                         <button className="btn btn-dark btn-block"><i className="fa fa-times"  aria-hidden="true"></i></button>
                     </Link>
                     <a href='#' className='logo'> Course Editor: {this.state.course.title}</a>

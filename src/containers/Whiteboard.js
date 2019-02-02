@@ -11,14 +11,17 @@ class WhiteBoard extends Component {
 
     render() {
         return (
-                <Router>
-                    <div>
-                        <Route path="/courses"
-                               component={CourseManagerApp}/>
-                        <Route path="/course/:courseId"
-                                   component={CourseEditor}/>
-                    </div>
-                </Router>
+            <Router>
+            <div>
+
+                <Route path='/' exact
+                       render={() =>
+                           <CourseManagerApp/>}/>
+                <Route path="/course/:courseId"
+                       exact
+                       component={CourseEditor}/>
+            </div>
+            </Router>
         )
     }
 }
