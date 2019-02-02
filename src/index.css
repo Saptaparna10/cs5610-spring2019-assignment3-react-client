@@ -81,3 +81,7 @@ h2 {
   font-weight: 700;
   text-rendering: optimizeLegibility;
 }
+
+.wide-ddl {
+  width: 100%
+}

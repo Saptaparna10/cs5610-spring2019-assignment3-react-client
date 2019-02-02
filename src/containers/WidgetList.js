@@ -36,8 +36,8 @@ export default class WidgetList extends React.Component{
                     </div>
                 </div>
                 <div>&nbsp;</div>
-                <div className='wide-ddl'>
-                    <select>
+                <div >
+                    <select className='wide-ddl'>
                         <option value="Heading1">Heading1</option>
                         <option value="Heading2">Heading2</option>
                         <option value="Heading3">Heading3</option>
@@ -110,7 +110,7 @@ export default class WidgetList extends React.Component{
                     </div>
                     <div>&nbsp;</div>
                     <div className="dropdown">
-                        <select name="widget">
+                        <select name="widget" className='wide-ddl'>
                             <option value="OL">Ordered list</option>
                             <option value="UL">Unordered list</option>
                         </select>
@@ -180,14 +180,7 @@ export default class WidgetList extends React.Component{
                         </div>
                     </div>
                     <div>&nbsp;</div>
-                    <div className="dropdown">
-                        <select name="widget">
-                            <option value="LIST">List</option>
-                            <option value="HEADING">Heading</option>
-                            <option value="PARA">Paragraph</option>
-                            <option value="LINK">Image</option>
-                        </select>
-                    </div>
+
                     <div>&nbsp;</div>
                     <div className='row'>
                         <div className="container-fluid">
@@ -269,6 +262,9 @@ export default class WidgetList extends React.Component{
                             <input  className="form-control" aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-lg" placeholder='Link text'/>
                         </div>
+                    </div>
+                    <div>
+                        &nbsp;
                     </div>
                     <div>
                         <h3>Preview</h3>
