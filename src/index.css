@@ -27,7 +27,7 @@ h1 {
   text-rendering: optimizeLegibility;
 }
 
-h2 {
+.title {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   text-rendering: optimizeLegibility;
@@ -43,7 +43,7 @@ h2 {
 }
 
 .longcol {
-  height: 2025px;
+  height: 100%;
 }
 
 .modulerow {
@@ -84,4 +84,8 @@ h2 {
 
 .wide-ddl {
   width: 100%
+}
+
+.imageHeight {
+  height: 150px;
 }

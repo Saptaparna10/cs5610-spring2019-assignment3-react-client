@@ -3,8 +3,12 @@ import CourseService from '../services/CourseService'
 import ModuleList from './ModuleList'
 import LessonTabs from './LessonTabs'
 import TopicPills from './TopicPills'
-import WidgetList from "./WidgetList";
 import {Link} from "react-router-dom";
+
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import {widgetReducer} from './../reducers/WidgetReducer';
+import App from './../containers/WidgetList';
 
 export default class CourseEditor
     extends React.Component{
@@ -185,6 +189,18 @@ export default class CourseEditor
 
     /**------------Render--------------**/
     render(){
+        let initialState = {
+            widgets: [],
+            preview: false,
+            nonUniqueName: false,
+            courseId: this.state.course.id,
+            moduleId: this.state.module.id,
+            lessonId: this.state.lesson.id,
+            topicId: this.state.topic.id
+        }
+
+        let store = createStore(widgetReducer, initialState);
+
         return (
             <div>
                 <div className="row bg-dark">
@@ -197,8 +213,8 @@ export default class CourseEditor
                 <div className="row bg-dark">
                     &nbsp;
                 </div>
-                <div className="row">
-                    <div className="col-md-4 bg-dark longcol d-none d-md-block ">
+                <div className="row longcol">
+                    <div className="col-md-4 bg-dark d-none d-md-block " >
                             <ModuleList
                                 courseId={this.state.course.id}
                                 selectModule={this.selectModule}
@@ -244,19 +260,22 @@ export default class CourseEditor
 
                             <div>&nbsp;</div>
 
-                            <div className="row">
+                            {/*<div className="row">*/}
 
-                                <div className="col text-right">
-                                        <button className="btn btn-success">Save</button>
-                                        <i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>
-                                        Preview
-                                </div>
+                                {/*<div className="col text-right">*/}
+                                        {/*<button className="btn btn-success">Save</button>*/}
+                                        {/*<i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>*/}
+                                        {/*Preview*/}
+                                {/*</div>*/}
 
-                            </div>
+                            {/*</div>*/}
                             <div>
                                 &nbsp;
                             </div>
-                            <WidgetList/>
+
+                                <Provider store={store}>
+                                    <App topicId={this.state.topicId}/>
+                                </Provider>
                         </div>
 
                 </div>

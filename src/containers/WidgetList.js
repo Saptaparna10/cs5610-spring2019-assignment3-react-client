@@ -1,291 +1,123 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import * as actions from "../actions"
+import WidgetContainer from '../components/Widget'
+import Toggle from 'react-toggle'
+require("react-toggle/style.css")
 
-export default class WidgetList extends React.Component{
+
+
+class WidgetList extends Component {
+    constructor(props) {
+        super(props);
+        this.props.findAllWidgetsForTopic();
+    }
+
+
+    componentDidUpdate(prevProps) {
+        if (this.props.topicId !== prevProps.topicId) {
+            this.props.findAllWidgetsForTopic();
+        }
+
+    }
+
+
+    sort(jsonObj) {
+
+        jsonObj.sort(function (p, q) {
+            return p.orderOfWidget - q.orderOfWidget;
+        });
+
+        return jsonObj;
+    }
+
+
+    renderWidgets() {
+        var newWidgetList = [];
+        if (this.props.widgets != undefined) {
+            var widgets = this.sort(this.props.widgets);
+
+            for (var w in widgets) {
+                var widget = widgets[w];
+                var disableUp = false;
+                var disableDown = false;
+                if (w == 0)
+                    disableUp = true;
+                if (w == widgets.length - 1)
+                    disableDown = true;
+                newWidgetList.push(<WidgetContainer widget={widget}
+                                                    preview={this.props.previewMode}
+                                                    key={w}
+                                                    disableUp={disableUp}
+                                                    disableDown={disableDown}/>)
+            }
+        }
+        return newWidgetList;
+    }
+
     render() {
-        return(
+        return (
             <div>
-            {/*heading widget*/}
-            <div className='container-fluid widgetborder'>
-                <div className='row'>
-                    <div className='col-sm-8'>
-                        <h3>Heading Widget</h3>
-                    </div>
+                    <div className="row">
+                        <div className="col">
 
-                    <div className='col-md-4 text-right '>
-                        <button className="btn btn-warning widgetborder"><i className="fa fa-arrow-up" aria-hidden="true"></i>
-                        </button>
-                        <button className="btn btn-warning widgetborder"> <i className="fa fa-arrow-down" aria-hidden="true"></i>
-                        </button>
-                        <select name="widget d-flex">
-                            <option value="HEADING">Heading</option>
-                            <option value="PARA">Paragraph</option>
-                            <option value="LIST">List</option>
-                            <option value="LINK">Link</option>
-                        </select>
-                        <button className="btn btn-danger widgetborder"><i className="fa fa-times" aria-hidden="true"></i></button>
-                    </div>
+                            <label className="float-right ">
+                                <span className="pr-3 text-dark" style={{fontSize:"x-large"}} >Preview</span>
+                                <div className="float-right py-2">
+                                    <Toggle
+                                        defaultChecked={this.props.previewMode}
+                                        onChange={this.props.preview} className="form-control" />
+                                </div>
+                            </label>
 
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-                <div className='row'>
-                    <div className="container-fluid">
-                        <input type="text" className="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-lg" placeholder='Heading name'/>
-                    </div>
-                </div>
-                <div>&nbsp;</div>
-                <div >
-                    <select className='wide-ddl'>
-                        <option value="Heading1">Heading1</option>
-                        <option value="Heading2">Heading2</option>
-                        <option value="Heading3">Heading3</option>
-                        <option value="Heading4">Heading4</option>
-                    </select>
-                </div>
-                <div>&nbsp;</div>
-                <div className='row'>
-                    <div className="container-fluid">
-                        <input type="text" className="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-lg" placeholder='Widget text'/>
-                    </div>
-                </div>
-                <div>&nbsp;</div>
-                <div>
-                    <h3>Preview</h3>
-                </div>
-                <div>&nbsp;</div>
-                <div>
-                    <h1>Heading Text</h1>
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-
-            </div>
-                <div className='row float-right'>
-                    <div className='col'>
-                    <button className='btn-success'> <i className="fa fa-plus" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <div>
-                    &nbsp;
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-
-             {/*list widget*/}
-
-
-                <div className='container-fluid widgetborder'>
-                    <div className='row'>
-                        <div className='col-sm-8'>
-                            <h3>List Widget</h3>
-                        </div>
-
-                        <div className='col-md-4 text-right'>
-                            <button className="btn btn-warning widgetborder"><i className="fa fa-arrow-up" aria-hidden="true"></i>
+                            <button className="btn btn-success mr-3 float-right" hidden={this.props.previewMode}
+                                    onClick={this.props.save} title="Save">
+                                Save
                             </button>
-                            <button className="btn btn-warning widgetborder"> <i className="fa fa-arrow-down" aria-hidden="true"></i>
-                            </button>
-                            <select name="widget">
-                                <option value="LIST">List</option>
-                                <option value="PARA">Paragraph</option>
-                                <option value="HEADING">Heading</option>
-                                <option value="LINK">Image</option>
-                            </select>
-                            <button className="btn btn-danger widgetborder"><i className="fa fa-times" aria-hidden="true"></i></button>
                         </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <ul>
+                                {this.renderWidgets()}
+                            </ul>
 
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <textarea  className="form-control" aria-label="Sizing example input"
-                                       aria-describedby="inputGroup-sizing-lg" placeholder='Heading name'/>
                         </div>
                     </div>
-                    <div>&nbsp;</div>
-                    <div className="dropdown">
-                        <select name="widget" className='wide-ddl'>
-                            <option value="OL">Ordered list</option>
-                            <option value="UL">Unordered list</option>
-                        </select>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input type="text" className="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-lg" placeholder='Put each item in seperate row'/>
+
+                    <div className="row">
+                        <div className="col">
+                            <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
+                               onClick={this.props.addWidget}></i>
                         </div>
                     </div>
-                    <div>&nbsp;</div>
-                    <div>
-                        <h3>Preview</h3>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div>
-                        <ul>
-                            <li>Put each</li>
-                            <li>item</li>
-                            <li>in seperate row</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className='row float-right'>
-                    <div className='col'>
-                        <button className='btn-success'> <i className="fa fa-plus" aria-hidden="true"></i></button>
-                    </div>
+
                 </div>
 
-                <div>
-                    &nbsp;
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-
-                {/*Paragraph widget*/}
-
-
-                <div className='container-fluid widgetborder'>
-                    <div className='row'>
-                        <div className='col-sm-8'>
-                            <h3>Paragraph Widget</h3>
-                        </div>
-
-                        <div className='col-md-4 text-right'>
-                            <button className="btn btn-warning widgetborder"><i className="fa fa-arrow-up" aria-hidden="true"></i>
-                            </button>
-                            <button className="btn btn-warning widgetborder"> <i className="fa fa-arrow-down" aria-hidden="true"></i>
-                            </button>
-                            <select name="widget">
-                                <option value="PARA">Paragraph</option>
-                                <option value="HEADING">Heading</option>
-                                <option value="LIST">List</option>
-                                <option value="LINK">Image</option>
-                            </select>
-                            <button className="btn btn-danger widgetborder"><i className="fa fa-times" aria-hidden="true"></i></button>
-                        </div>
-
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <textarea type="text" className="form-control" aria-label="Sizing example input"
-                                      aria-describedby="inputGroup-sizing-lg" placeholder='loren ipsum'/>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input type="text" className="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-lg" placeholder='Widget name'/>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div>
-                        <h3>Preview</h3>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div>
-                        <p>loren ipsum</p>
-                    </div>
-                </div>
-                <div className='row float-right'>
-                    <div className='col'>
-                        <button className='btn-success'> <i className="fa fa-plus" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <div>
-                    &nbsp;
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-
-
-                {/*Link widget*/}
-
-                <div className='container-fluid widgetborder'>
-                    <div className='row'>
-                        <div className='col-sm-8'>
-                            <h3>Link Widget</h3>
-                        </div>
-
-                        <div className='col-md-4 text-right'>
-                            <button className="btn btn-warning widgetborder"><i className="fa fa-arrow-up" aria-hidden="true"></i>
-                            </button>
-                            <button className="btn btn-warning widgetborder"> <i className="fa fa-arrow-down" aria-hidden="true"></i>
-                            </button>
-                            <select name="widget">
-                                <option value="Link">Link</option>
-                                <option value="HEADING">Heading</option>
-                                <option value="PARA">Paragraph</option>
-                                <option value="LIST">List</option>
-
-                            </select>
-                            <button className="btn btn-danger widgetborder"><i className="fa fa-times" aria-hidden="true"></i></button>
-                        </div>
-
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input  className="form-control" aria-label="Sizing example input"
-                                       aria-describedby="inputGroup-sizing-lg" placeholder='https://www.youtube.com/'/>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input  className="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg" placeholder='Link text'/>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input  className="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg" placeholder='https://www.youtube.com'/>
-                        </div>
-                    </div>
-                    <div>&nbsp;</div>
-                    <div className='row'>
-                        <div className="container-fluid">
-                            <input  className="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-lg" placeholder='Link text'/>
-                        </div>
-                    </div>
-                    <div>
-                        &nbsp;
-                    </div>
-                    <div>
-                        <h3>Preview</h3>
-                    </div>
-                    <div>&nbsp;</div>
-                   <a href='#'>Link Text</a>
-                </div>
-                <div className='row float-right'>
-                    <div className='col'>
-                        <button className='btn-success'> <i className="fa fa-plus" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <div>
-                    &nbsp;
-                </div>
-                <div>
-                    &nbsp;
-                </div>
-
-
-            </div>
-    );}
+        )
+    }
 }
+
+const stateToPropertiesMapper = (state, ownProps) => ({
+    topicId: ownProps.topicId,
+    widgets: state.widgets,
+    previewMode: state.preview
+
+})
+
+
+const dispatcherToPropsMapper
+    = dispatch => ({
+    findAllWidgetsForTopic: () => actions.findAllWidgetsForTopic(dispatch),
+    addWidget: () => actions.addWidget(dispatch),
+    save: () => actions.save(dispatch),
+    preview: () => actions.preview(dispatch)
+})
+
+
+const App = connect(
+    stateToPropertiesMapper,
+    dispatcherToPropsMapper)(WidgetList)
+
+
+export default App
