@@ -1,5 +1,6 @@
 import * as constants from "../constants/index";
 import WidgetServiceClient from "../services/WidgetService";
+import CourseService from '../services/CourseService'
 
 
 export const headingSizeChanged = (dispatch, widgetId, newSize) => (
@@ -61,24 +62,27 @@ export const listTypeChanged = (dispatch, widgetId, newType) => (
 
 
 export const findAllWidgetsForTopic = (dispatch) => {
-    var loc = window.location.href;
-    var arrUrl = loc.split('/');
-    console.log(arrUrl);
-    var courseId = arrUrl[4];
-    var moduleId = arrUrl[7];
-    var lessonId = arrUrl[10];
-    var topicId = arrUrl[13];
-    console.log(courseId, moduleId, lessonId, topicId);
-    var widgetService = WidgetServiceClient.instance;
-    // widgetService.findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId).then(widgets => dispatch({
-    //     type: constants.FIND_ALL_WIDGETS,
-    //     widgets: widgets
-    // }));
-    var widgets = widgetService.findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId);
+    // var loc = window.location.href;
+    // var arrUrl = loc.split('/');
+    // console.log(arrUrl);
+    // var courseId = arrUrl[4];
+    // var moduleId = arrUrl[7];
+    // var lessonId = arrUrl[10];
+    // var topicId = arrUrl[13];
+    // console.log(courseId, moduleId, lessonId, topicId);
+    // var widgetService = WidgetServiceClient.instance;
+    // // widgetService.findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId).then(widgets => dispatch({
+    // //     type: constants.FIND_ALL_WIDGETS,
+    // //     widgets: widgets
+    // // }));
+    // var widgets = widgetService.findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId);
+    // dispatch({
+    //          type: constants.FIND_ALL_WIDGETS,
+    //          widgets: widgets
+    //      });
     dispatch({
-             type: constants.FIND_ALL_WIDGETS,
-             widgets: widgets
-         });
+                 type: constants.FIND_ALL_WIDGETS,
+             });
 }
 
 export const addWidget = dispatch => (

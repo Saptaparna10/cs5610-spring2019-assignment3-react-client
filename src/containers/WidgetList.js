@@ -10,13 +10,14 @@ require("react-toggle/style.css")
 class WidgetList extends Component {
     constructor(props) {
         super(props);
-        this.props.findAllWidgetsForTopic();
+        //this.props.findAllWidgetsForTopic(this.props.topicId);
     }
 
 
     componentDidUpdate(prevProps) {
         if (this.props.topicId !== prevProps.topicId) {
-            this.props.findAllWidgetsForTopic();
+            console.log('Widget list');
+            //this.props.findAllWidgetsForTopic(this.props.widgets);
         }
 
     }
@@ -99,7 +100,7 @@ class WidgetList extends Component {
 }
 
 const stateToPropertiesMapper = (state, ownProps) => ({
-    topicId: ownProps.topicId,
+    topicId: state.topicId,
     widgets: state.widgets,
     previewMode: state.preview
 

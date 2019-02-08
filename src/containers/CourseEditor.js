@@ -27,7 +27,8 @@ export default class CourseEditor
             lesson: (course.modules.length!=0 && course.modules[0].lessons.length!=0)?course.modules[0].lessons[0]: '',
             newLesson:'',
             topic: (course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0)? course.modules[0].lessons[0].topics[0]: '',
-            newTopic:''
+            newTopic:'',
+            widgets: (course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0 && course.modules[0].lessons[0].topics[0].widgets.length!=0)? course.modules[0].lessons[0].topics[0].widgets: [],
         }
         this.moduleTitleChanged = this.moduleTitleChanged.bind(this);
         this.selectModule = this.selectModule.bind(this);
@@ -68,7 +69,10 @@ export default class CourseEditor
 
     selectModule = module => {
         this.setState({
-            module: module
+            module: module,
+            lesson: module.lessons[0],
+            topic: module.lessons[0].topics[0],
+            widgets: module.lessons[0].topics[0].widgets
         })
     }
 
@@ -114,7 +118,9 @@ export default class CourseEditor
 
     selectLesson = lesson =>
         this.setState({
-            lesson: lesson
+            lesson: lesson,
+            topic: lesson.topics[0],
+            widgets: lesson.topics[0].widgets
         })
 
     createLesson(){
@@ -148,7 +154,8 @@ export default class CourseEditor
     /** ---------Topics-----------**/
     selectTopic = topic =>
         this.setState({
-            topic: topic
+            topic: topic,
+            widgets: topic.widgets
         })
 
     topicTitleChanged(event) {
@@ -190,7 +197,7 @@ export default class CourseEditor
     /**------------Render--------------**/
     render(){
         let initialState = {
-            widgets: [],
+            widgets: this.state.widgets,
             preview: false,
             nonUniqueName: false,
             courseId: this.state.course.id,
@@ -274,7 +281,9 @@ export default class CourseEditor
                             </div>
 
                                 <Provider store={store}>
-                                    <App topicId={this.state.topicId}/>
+                                    <App
+                                        topicId={this.state.topic.id}
+                                        widgets={this.state.widgets}/>
                                 </Provider>
                         </div>
 

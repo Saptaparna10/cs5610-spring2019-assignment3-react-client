@@ -1,4 +1,5 @@
 import widgets from '../resources/widgets'
+import courses from '../resources/courses.json'
 
 let _singleton = Symbol();
 

@@ -46,5 +46,6 @@ class CourseService {
         this.courses[foundIndex] = selectedCourse;
         return this.courses
     }
+
 }
 export default CourseService
