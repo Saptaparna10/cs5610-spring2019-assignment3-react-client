@@ -10,6 +10,7 @@ require("react-toggle/style.css")
 class WidgetList extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
         //this.props.findAllWidgetsForTopic(this.props.topicId);
     }
 
@@ -17,7 +18,7 @@ class WidgetList extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.topicId !== prevProps.topicId) {
             console.log('Widget list');
-            //this.props.findAllWidgetsForTopic(this.props.widgets);
+            this.props.findAllWidgetsForTopic(this.props.courseId, this.props.moduleId, this.props.lessonId, this.props.topicId, this.props.topicId);
         }
 
     }
@@ -46,7 +47,8 @@ class WidgetList extends Component {
                     disableUp = true;
                 if (w == widgets.length - 1)
                     disableDown = true;
-                newWidgetList.push(<WidgetContainer widget={widget}
+                newWidgetList.push(<WidgetContainer widgets={this.props.widgets}
+                                                    widget={widget}
                                                     preview={this.props.previewMode}
                                                     key={w}
                                                     disableUp={disableUp}
@@ -100,16 +102,15 @@ class WidgetList extends Component {
 }
 
 const stateToPropertiesMapper = (state, ownProps) => ({
-    topicId: state.topicId,
+    topicId: ownProps.topicId,
     widgets: state.widgets,
-    previewMode: state.preview
-
+    previewMode: state.preview,
 })
 
 
 const dispatcherToPropsMapper
     = dispatch => ({
-    findAllWidgetsForTopic: () => actions.findAllWidgetsForTopic(dispatch),
+    findAllWidgetsForTopic: (courseId, moduleId, lessonId, topicId) => actions.findAllWidgetsForTopic(dispatch, courseId, moduleId, lessonId, topicId),
     addWidget: () => actions.addWidget(dispatch),
     save: () => actions.save(dispatch),
     preview: () => actions.preview(dispatch)

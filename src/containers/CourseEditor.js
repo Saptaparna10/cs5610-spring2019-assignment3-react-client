@@ -282,6 +282,9 @@ export default class CourseEditor
 
                                 <Provider store={store}>
                                     <App
+                                        courseId={this.state.course.id}
+                                        moduleId={this.state.module.id}
+                                        lessonId={this.state.lesson.id}
                                         topicId={this.state.topic.id}
                                         widgets={this.state.widgets}/>
                                 </Provider>

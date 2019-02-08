@@ -170,7 +170,7 @@ export const widgetReducer = (state, action) => {
             return newState
 
         case constants.DELETE_WIDGET:
-            return {
+            var newState = {
                 widgets: state.widgets.filter(widget => (
                     widget.id !== action.id
                 )),
@@ -179,6 +179,8 @@ export const widgetReducer = (state, action) => {
                 topicId: state.topicId,
                 lessonId: state.lessonId
             }
+            return Object.assign({}, newState)
+
 
         case constants.MOVE_UP:
 

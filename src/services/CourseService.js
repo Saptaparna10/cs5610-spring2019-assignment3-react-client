@@ -47,5 +47,23 @@ class CourseService {
         return this.courses
     }
 
+    /** WIDGETS **/
+
+    findAllWidgetsForTopic = (courseId, moduleId, lessonId, topicId) => {
+        var course = this.courses.find(
+            course => course.id == courseId
+        );
+        var module = course.modules.find(
+            module => module.id === moduleId
+        );
+        var lesson = module.lessons.find(
+            lesson => lesson.id === lessonId
+        );
+        var topic = lesson.topics.find(
+            topic => topic.id === topicId
+        );
+        return topic.widgets;
+    }
+
 }
 export default CourseService
