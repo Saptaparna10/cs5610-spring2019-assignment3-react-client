@@ -400,7 +400,8 @@ const Widget = ({widget, preview, disableUp, disableDown, dispatch}) => {
                                         type: 'SELECT_WIDGET_TYPE',
                                         id: widget.id,
                                         widgetType: selectElement.value
-                                    })} ref={node => selectElement = node}>
+                                    })}
+                                ref={node => selectElement = node}>
                             <option value='HEADING'>Heading</option>
                             <option value='PARAGRAPH'>Paragraph</option>
                             <option value='LIST'>List</option>

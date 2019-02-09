@@ -1,9 +1,12 @@
 import * as constants from "./../constants/index"
 import WidgetServiceClient from "../services/WidgetService";
+import CourseService from "../services/CourseService";
 
-export const widgetReducer = (state, action) => {
+export const widgetReducer = (state={widgets:[]}, action) => {
+
 
     var widgetService = WidgetServiceClient.instance;
+    var cs = new CourseService()
 
     switch (action.type) {
 
@@ -193,8 +196,11 @@ export const widgetReducer = (state, action) => {
             widgets[widIndex].orderOfWidget = widgets[widIndex - 1].orderOfWidget;
             widgets[widIndex - 1].orderOfWidget = temp;
 
+            var cs = new CourseService();
 
-            var newWid = JSON.parse(JSON.stringify(widgets));
+            var newWidgets = cs.sort(widgets);
+
+            var newWid = JSON.parse(JSON.stringify(newWidgets));
 
             return {
                 widgets: newWid,
@@ -215,7 +221,11 @@ export const widgetReducer = (state, action) => {
             widgets[widIndex].orderOfWidget = widgets[widIndex + 1].orderOfWidget;
             widgets[widIndex + 1].orderOfWidget = temp;
 
-            var newWid = JSON.parse(JSON.stringify(widgets));
+            var cs = new CourseService();
+
+            var newWidgets = cs.sort(widgets);
+
+            var newWid = JSON.parse(JSON.stringify(newWidgets));
 
             return {
                 widgets: newWid,
@@ -250,6 +260,13 @@ export const widgetReducer = (state, action) => {
 
 
             }
+
+        case constants.FIND_WIDGETS:
+            var newState = {
+                widgets: action.widgets
+            }
+            return Object.assign({}, newState)
+
         default:
             return state
     }

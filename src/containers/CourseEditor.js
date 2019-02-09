@@ -9,6 +9,8 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {widgetReducer} from './../reducers/WidgetReducer';
 import App from './../containers/WidgetList';
+import WidgetListContainer from '../containers/WidgetListContainer'
+import Toggle from "react-toggle";
 
 export default class CourseEditor
     extends React.Component{
@@ -50,6 +52,8 @@ export default class CourseEditor
         this.deleteTopic = this.deleteTopic.bind(this);
         this.editTopic = this.editTopic.bind(this);
         this.updateTopic = this.updateTopic.bind(this);
+
+        this.deleteWidget = this.deleteWidget.bind(this);
     }
 
     /** ---------Modules-----------**/
@@ -194,6 +198,14 @@ export default class CourseEditor
         this.setState({topic: this.state.topic});
     }
 
+    /**----------Widgets-------------**/
+
+    deleteWidget(widget) {
+        var removeIndex = this.state.topic.widgets.map(function(item) { return item.id; }).indexOf(widget.id);
+        this.state.topic.widgets.splice(removeIndex, 1);
+        this.setState({widgets: this.state.topic.widgets})
+    }
+
     /**------------Render--------------**/
     render(){
         let initialState = {
@@ -205,8 +217,9 @@ export default class CourseEditor
             lessonId: this.state.lesson.id,
             topicId: this.state.topic.id
         }
-
-        let store = createStore(widgetReducer, initialState);
+        //
+        // let store = createStore(widgetReducer, initialState);
+        const store = createStore(widgetReducer, initialState);
 
         return (
             <div>
@@ -280,14 +293,22 @@ export default class CourseEditor
                                 &nbsp;
                             </div>
 
-                                <Provider store={store}>
-                                    <App
-                                        courseId={this.state.course.id}
-                                        moduleId={this.state.module.id}
-                                        lessonId={this.state.lesson.id}
-                                        topicId={this.state.topic.id}
-                                        widgets={this.state.widgets}/>
-                                </Provider>
+                                {/*<Provider store={store}>*/}
+                                    {/*<App*/}
+                                        {/*courseId={this.state.course.id}*/}
+                                        {/*moduleId={this.state.module.id}*/}
+                                        {/*lessonId={this.state.lesson.id}*/}
+                                        {/*topicId={this.state.topic.id}*/}
+                                        {/*widgets={this.state.widgets}/>*/}
+                                {/*</Provider>*/}
+
+
+                            <Provider store={store}>
+                                <WidgetListContainer
+                                widgets={this.state.widgets}
+                                // deleteWidget={this.deleteWidget}
+                                />
+                            </Provider>
                         </div>
 
                 </div>

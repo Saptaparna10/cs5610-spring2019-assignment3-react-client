@@ -65,5 +65,20 @@ class CourseService {
         return topic.widgets;
     }
 
+    sort(jsonObj) {
+
+        jsonObj.sort(function (p, q) {
+            return p.orderOfWidget - q.orderOfWidget;
+        });
+
+        return jsonObj;
+    }
+
+    deleteWidget = (widgets, id) =>
+         widgets.filter(w =>
+            w.id !== id
+        )
+
+
 }
 export default CourseService

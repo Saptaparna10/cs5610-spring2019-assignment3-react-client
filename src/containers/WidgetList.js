@@ -104,7 +104,7 @@ class WidgetList extends Component {
 const stateToPropertiesMapper = (state, ownProps) => ({
     topicId: ownProps.topicId,
     widgets: state.widgets,
-    previewMode: state.preview,
+    previewMode: state.preview
 })
 
 
