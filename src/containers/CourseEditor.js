@@ -21,16 +21,17 @@ export default class CourseEditor
         super(props)
         this.courseService = new CourseService()
         const courseId = parseInt(props.match.params.courseId)
-        const course = this.courseService.findCourseById(courseId)
+        var course=''
+
         this.state = {
             course: course,
-            module: (course.modules.length!=0) ? course.modules[0]: '',
+            module: '',//(course.modules.length!=0) ? course.modules[0]: '',
             newModule: '',
-            lesson: (course.modules.length!=0 && course.modules[0].lessons.length!=0)?course.modules[0].lessons[0]: '',
+            lesson: '',//(course.modules.length!=0 && course.modules[0].lessons.length!=0)?course.modules[0].lessons[0]: '',
             newLesson:'',
-            topic: (course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0)? course.modules[0].lessons[0].topics[0]: '',
+            topic: '',//(course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0)? course.modules[0].lessons[0].topics[0]: '',
             newTopic:'',
-            widgets: (course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0 && course.modules[0].lessons[0].topics[0].widgets.length!=0)? course.modules[0].lessons[0].topics[0].widgets: [],
+            widgets: '',//(course.modules.length!=0 && course.modules[0].lessons.length!=0 && course.modules[0].lessons[0].topics.length!=0 && course.modules[0].lessons[0].topics[0].widgets.length!=0)? course.modules[0].lessons[0].topics[0].widgets: [],
         }
         this.moduleTitleChanged = this.moduleTitleChanged.bind(this);
         this.selectModule = this.selectModule.bind(this);
@@ -54,6 +55,17 @@ export default class CourseEditor
         this.updateTopic = this.updateTopic.bind(this);
 
         this.deleteWidget = this.deleteWidget.bind(this);
+    }
+
+    componentDidMount(){
+        //this.selectCourse(this.props.match.params.courseId);
+        this.courseService.findCourseById(this.props.match.params.courseId)
+            .then(course => {
+                this.setState({course: course,
+                module: (course.modules.length!=0) ? course.modules[0]: ''})
+                //this.props.dispatch(setSelectedCourse(course))
+                console.log(this.props.course)
+            });
     }
 
     /** ---------Modules-----------**/

@@ -19,19 +19,30 @@ export default class CourseManager
         this.renderView = this.renderView.bind(this);
         this.editCourse=this.editCourse.bind(this);
         this.state = {
-            courses: this.courseService.findAllCourses(),
+            courses: [],
             view: 'list',
             course: '',
             newCourse:''
         }
     }
 
+    componentDidMount(){
+        this.findAllCourses();
+    }
+
+    findAllCourses(){
+        this.courseService
+            .findAllCourses()
+            .then((courses) => {
+                this.setState({courses : courses});
+            })
+    }
 
     titleChanged(event) {
         this.setState(
             {
                 newCourse:{
-                    id :(new Date()).getTime(),
+                    id :'',
                     title: event.target.value,
                     modules:[{
                         title: '',
@@ -58,15 +69,20 @@ export default class CourseManager
     }
 
     addCourse(){
-        const courses = this.courseService.addCourse(this.state.newCourse);
-        document.getElementById('titleFld').value=''
-        this.setState({courses: courses});
+        // const courses = this.courseService.addCourse(this.state.newCourse);
+        // document.getElementById('titleFld').value=''
+        // this.setState({courses: courses});
+        this.courseService
+            .addCourse(this.state.newCourse)
+            .then(() => {this.findAllCourses(); });
     }
 
     deleteCourse(course){
-        const courses = this.courseService.deleteCourse(course);
-        this.setState({courses: courses});
-
+        // const courses = this.courseService.deleteCourse(course);
+        // this.setState({courses: courses});
+        this.courseService
+            .deleteCourse(course)
+            .then(() => {this.findAllCourses(); });
     }
 
     editCourse(course){
@@ -76,9 +92,12 @@ export default class CourseManager
     }
 
     updateCourse(){
-        const courses = this.courseService.updateCourse(this.state.course, this.state.newCourse);
-        document.getElementById('titleFld').value=''
-        this.setState({courses: courses});
+        // const courses = this.courseService.updateCourse(this.state.course, this.state.newCourse);
+        // document.getElementById('titleFld').value=''
+        // this.setState({courses: courses});
+        this.courseService
+            .updateCourse(this.state.course, this.state.newCourse)
+            .then(() => {this.findAllCourses(); });
     }
 
     renderView(){

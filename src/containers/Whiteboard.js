@@ -17,7 +17,7 @@ class WhiteBoard extends Component {
                 <Route path='/' exact
                        render={() =>
                            <CourseManagerApp/>}/>
-                <Route path="/course/:courseId"
+                <Route path="/api/courses/:courseId"
                        exact
                        component={CourseEditor}/>
             </div>

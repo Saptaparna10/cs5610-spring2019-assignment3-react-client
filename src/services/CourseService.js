@@ -1,50 +1,90 @@
 import courses from '../resources/courses.json'
+import * as constants from "./../constants/index"
 
 class CourseService {
     constructor() {
         this.courses = courses;
     }
-    addCourse = course => {
-        if(course === null) {
-            course = {
-                id :(new Date()).getTime(),
-                    title:'New Course',
-                    modules:[{
-                    title: '',
-                    lessons: [{
-                        title:'',
-                        topics:[{
-                            title:''
-                        }]
-                    }]
-                }]
-            }
+    // addCourse = course => {
+    //     if(course === null) {
+    //         course = {
+    //             id :(new Date()).getTime(),
+    //                 title:'New Course',
+    //                 modules:[{
+    //                 title: '',
+    //                 lessons: [{
+    //                     title:'',
+    //                     topics:[{
+    //                         title:''
+    //                     }]
+    //                 }]
+    //             }]
+    //         }
+    //
+    //     }
+    //     course.id = (new Date()).getTime()
+    //     this.courses.push(course)
+    //     return this.courses
+    // }
 
-        }
-        course.id = (new Date()).getTime()
-        this.courses.push(course)
-        return this.courses
+    addCourse(course){
+        //course.id = (new Date()).getTime()
+        return fetch(constants.BASE_URL+'/api/courses', {
+            method : 'post',
+            body : JSON.stringify(course),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
     }
 
-    findCourseById = courseId =>
-        this.course = this.courses.find(
-            course => course.id == courseId
-        )
+    // findCourseById = courseId =>
+    //     this.course = this.courses.find(
+    //         course => course.id == courseId
+    //     )
+    findCourseById(courseId){
+        return fetch(constants.BASE_URL+'/api/courses/'+ courseId)
+            .then(function (response) {
+                return response.json();
+            });
+    }
 
 
-    findAllCourses = () =>
-        this.courses;
+    // findAllCourses = () =>
+    //     this.courses;
+    findAllCourses(){
+        return fetch(constants.BASE_URL+'/api/courses')
+            .then(function (response) {
+                return response.json();
+            });
+    }
 
-    deleteCourse = deleteCourse =>
-        this.courses = this.courses.filter(
-            course => course.id !== deleteCourse.id
-        )
+    // deleteCourse = deleteCourse =>
+    //     this.courses = this.courses.filter(
+    //         course => course.id !== deleteCourse.id
+    //     )
+    deleteCourse(deleteCourse){
+        return fetch(constants.BASE_URL + '/api/courses/' + deleteCourse.id, {
+            method: 'delete'
+        }).then(function (response) {
+            return response;
+        })
+    }
 
     updateCourse = (selectedCourse, newCourse) => {
-        var foundIndex =  this.courses.findIndex(x => x.id == selectedCourse.id);
-        selectedCourse.title = newCourse.title;
-        this.courses[foundIndex] = selectedCourse;
-        return this.courses
+        // var foundIndex =  this.courses.findIndex(x => x.id == selectedCourse.id);
+        // selectedCourse.title = newCourse.title;
+        // this.courses[foundIndex] = selectedCourse;
+        // return this.courses
+        return fetch(constants.BASE_URL + '/api/courses/' + selectedCourse.id, {
+            method: 'put',
+            body: JSON.stringify(newCourse),
+            headers: {'Content-Type': 'application/json'}
+        }).then(function (response) {
+            return response;
+        })
     }
 
     /** WIDGETS **/

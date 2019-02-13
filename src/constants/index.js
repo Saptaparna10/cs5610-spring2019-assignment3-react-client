@@ -15,3 +15,5 @@ export const MOVE_DOWN='MOVE_DOWN'
 export const MOVE_UP='MOVE_UP'
 
 export const FIND_WIDGETS='FIND_WIDGETS'
+
+export const BASE_URL = 'http://localhost:8080'
