@@ -36,7 +36,7 @@ export default class LessonsTabs
 
 
     renderLessons(){
-        let lessons = this.props.lessons.map((lesson, index) => {
+        let lessons = (this.props.lessons!=null && this.props.lessons.length>0)? this.props.lessons.map((lesson, index) => {
             let active = this.state.selectedLesson === index ? 'active' : '';
             return (
                 <LessonTabItem key={index}
@@ -51,7 +51,7 @@ export default class LessonsTabs
                                editLesson={this.props.editLesson}
                 />
             )
-        });
+        }):null;
 
             return (
                 <div>

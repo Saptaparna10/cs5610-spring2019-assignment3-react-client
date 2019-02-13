@@ -50,9 +50,8 @@ export default class TopicPills extends React.Component{
     }
 
     renderTopics() {
-        let topics = this.props.topics.map((topic, i) => {
+        let topics = (this.props.topics!=null && this.props.topics.length>0)?this.props.topics.map((topic, i) => {
             let active = i === this.state.selectedTopic ? 'active' : '';
-            //alert('Topic!!!!!! i' + i+' active= '+active);
             return (
                     <li className="nav-item "
                         onClick={() => {this.select(i)
@@ -70,7 +69,7 @@ export default class TopicPills extends React.Component{
                         {/*</Link>*/}
                     </li>
             )
-        });
+        }):null;
 
         return (
                     <div className="nav item">

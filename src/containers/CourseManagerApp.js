@@ -43,16 +43,16 @@ export default class CourseManager
             {
                 newCourse:{
                     id :'',
-                    title: event.target.value,
-                    modules:[{
-                        title: '',
-                        lessons: [{
-                            title:'',
-                            topics:[{
-                                title:''
-                            }]
-                        }]
-                    }]
+                    title: event.target.value
+                    // modules:[{
+                    //     title: '',
+                    //     lessons: [{
+                    //         title:'',
+                    //         topics:[{
+                    //             title:''
+                    //         }]
+                    //     }]
+                    // }]
                 }
 
 
@@ -74,7 +74,8 @@ export default class CourseManager
         // this.setState({courses: courses});
         this.courseService
             .addCourse(this.state.newCourse)
-            .then(() => {this.findAllCourses(); });
+            .then(() => {this.findAllCourses(); })
+            .then(() => {document.getElementById('titleFld').value=''})
     }
 
     deleteCourse(course){
@@ -97,7 +98,8 @@ export default class CourseManager
         // this.setState({courses: courses});
         this.courseService
             .updateCourse(this.state.course, this.state.newCourse)
-            .then(() => {this.findAllCourses(); });
+            .then(() => {this.findAllCourses(); })
+            .then(() => {document.getElementById('titleFld').value=''})
     }
 
     renderView(){

@@ -44,11 +44,13 @@ class CourseService {
     //     this.course = this.courses.find(
     //         course => course.id == courseId
     //     )
-    findCourseById(courseId){
+    findCourseById(courseId, callback){
         return fetch(constants.BASE_URL+'/api/courses/'+ courseId)
             .then(function (response) {
-                return response.json();
-            });
+                if(response.headers.get("content-type")!=null)
+                    return response.json();
+                else return null;
+            }).then(callback);
     }
 
 
@@ -78,9 +80,10 @@ class CourseService {
         // selectedCourse.title = newCourse.title;
         // this.courses[foundIndex] = selectedCourse;
         // return this.courses
+        selectedCourse.title = newCourse.title
         return fetch(constants.BASE_URL + '/api/courses/' + selectedCourse.id, {
             method: 'put',
-            body: JSON.stringify(newCourse),
+            body: JSON.stringify(selectedCourse),
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
             return response;
