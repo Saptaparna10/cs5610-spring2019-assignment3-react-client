@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseEditor from "./CourseEditor";
 import CourseManagerApp from "./CourseManagerApp";
+import Login from "../components/Login";
+import Register from '../components/Register'
+import Profile from '../components/Profile'
 
 
 class WhiteBoard extends Component {
@@ -20,6 +23,9 @@ class WhiteBoard extends Component {
                 <Route path="/api/courses/:courseId"
                        exact
                        component={CourseEditor}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
+                <Route path="/profile" component={Profile}/>
             </div>
             </Router>
         )

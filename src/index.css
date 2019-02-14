@@ -6,13 +6,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-weight: 500;
+
+}
+
+.welcome {
+  color: darkred;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-weight: 500;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 
 .nav-pills li {
@@ -88,4 +96,23 @@ h1 {
 
 .imageHeight {
   height: 150px;
+}
+
+.wrap {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #ffd8d8;
+  -webkit-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.3);
+}
+
+.login {
+  background-color: #f8dda9;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 50px;
+  text-rendering: optimizeLegibility;
 }

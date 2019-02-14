@@ -48,7 +48,8 @@ export default class CourseEditor
             lesson:'',
             topics:[],
             newTopic:'',
-            topic:''
+            topic:'',
+            widgets:[]
         };
 
         this.findAllModulesForCourse = this.findAllModulesForCourse.bind(this);
@@ -104,6 +105,7 @@ export default class CourseEditor
                                                                             lessons: course.modules[0].lessons});
         if(this.state.lessons!=null && this.state.lessons.length>0) this.setState({topics: this.state.lessons[0].topics})
         if(this.state.topics!=null && this.state.topics.length>0) this.setState({topic: this.state.topics[0]})
+        //if(this.state.topic.widgets!=null && this.state.topics.widgets>0) this.setState({widgets: this.state.topic.widgets})
 
         //document.getElementById('form1').style.display="none";
         //document.getElementById('title').style.display='';
@@ -346,18 +348,18 @@ export default class CourseEditor
 
     /**------------Render--------------**/
     render(){
-        // let initialState = {
-        //     widgets: this.state.widgets,
-        //     preview: false,
-        //     nonUniqueName: false,
-        //     courseId: this.state.course.id,
-        //     moduleId: this.state.module.id,
-        //     lessonId: this.state.lesson.id,
-        //     topicId: this.state.topic.id
-        // }
-        //
-        // let store = createStore(widgetReducer, initialState);
-        const store = createStore(widgetReducer);
+        let initialState = {
+            widgets: this.state.widgets,
+            preview: false,
+            nonUniqueName: false,
+            courseId: this.state.course.id,
+            moduleId: this.state.module.id,
+            lessonId: this.state.lesson.id,
+            topicId: this.state.topic.id
+        }
+
+        let store = createStore(widgetReducer, initialState);
+        // const store = createStore(widgetReducer);
 
         return (
             <div>
@@ -440,12 +442,12 @@ export default class CourseEditor
                                         {/*widgets={this.state.widgets}/>*/}
                                 {/*</Provider>*/}
 
-                            {/*<Provider store={store}>*/}
-                                {/*<WidgetListContainer*/}
-                                {/*widgets={this.state.widgets}*/}
-                                {/*// deleteWidget={this.deleteWidget}*/}
-                                {/*/>*/}
-                            {/*</Provider>*/}
+                            <Provider store={store}>
+                                <WidgetListContainer
+                                widgets={this.state.widgets}
+                                // deleteWidget={this.deleteWidget}
+                                />
+                            </Provider>
                         </div>
 
                 </div>
