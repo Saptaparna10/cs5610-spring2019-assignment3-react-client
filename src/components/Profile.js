@@ -27,7 +27,7 @@ class Login extends React.Component{
                     this.setState({user: user})
                 else {
                     alert('no active session found')
-                    this.props.history.push('/login')
+                    this.props.history.push('/')
                 }
             })
     }
@@ -35,7 +35,7 @@ class Login extends React.Component{
     logout(){
         this.userService.logout()
             .then(() => {
-                this.props.history.push('/login')
+                this.props.history.push('/')
             })
     }
 
@@ -100,7 +100,7 @@ class Login extends React.Component{
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label"></label>
 
-                        <button id="loginBtn" type="button" className="btn btn-info btn-block" onClick={() => {this.props.history.push('/')}}>Courses
+                        <button id="loginBtn" type="button" className="btn btn-info btn-block" onClick={() => {this.props.history.push('/courses')}}>Courses
                         </button>
                         <button id="loginBtn" type="button" className="btn btn-warning btn-block" onClick={this.logout}>Log out
                         </button>

@@ -95,7 +95,7 @@ class CourseEditor
     logout(){
         this.userService.logout()
             .then(() => {
-                this.props.history.push('/login')
+                this.props.history.push('/')
             })
     }
 

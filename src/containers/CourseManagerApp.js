@@ -42,7 +42,7 @@ class CourseManager
                 if(courses!=null)
                     this.setState({courses : courses});
                 else
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
             })
 
     }
@@ -84,7 +84,7 @@ class CourseManager
                 if(course!=null)
                     this.findAllCourses();
                 else
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
             })
             .then(() => {document.getElementById('titleFld').value=''})
             .then(() => this.state.newCourse='')
@@ -99,7 +99,7 @@ class CourseManager
                 if(course!=null)
                     this.findAllCourses();
                 else
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
             })
     }
 
@@ -119,7 +119,7 @@ class CourseManager
                 if(course!=null)
                     this.findAllCourses();
                 else
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
             })
             .then(() => {document.getElementById('titleFld').value=''})
     }
@@ -127,7 +127,7 @@ class CourseManager
     logout(){
         this.userService.logout()
             .then(() => {
-                this.props.history.push('/login')
+                this.props.history.push('/')
             })
     }
 

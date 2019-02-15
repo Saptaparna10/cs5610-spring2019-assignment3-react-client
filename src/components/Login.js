@@ -43,7 +43,7 @@ class Login extends React.Component{
         if(user!=null)
             this.props.history.push('/profile');
         else
-            this.props.history.push('/login');
+            this.props.history.push('/');
     }
 
     register(){

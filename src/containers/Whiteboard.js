@@ -17,13 +17,11 @@ class WhiteBoard extends Component {
             <Router>
             <div>
 
-                <Route path='/' exact
-                       render={() =>
-                           <CourseManagerApp/>}/>
+                <Route path='/courses' component={CourseManagerApp}/>
                 <Route path="/api/courses/:courseId"
                        exact
                        component={CourseEditor}/>
-                <Route path="/login" component={Login}/>
+                <Route path="/" exact render={() => <Login/>}/>
                 <Route path="/register" component={Register}/>
                 <Route path="/profile" component={Profile}/>
             </div>

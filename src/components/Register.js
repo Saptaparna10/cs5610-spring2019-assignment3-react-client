@@ -53,7 +53,7 @@ class Login extends React.Component{
 
     redirect(user){
         if(user!=null) {
-            this.props.history.push('/login');
+            this.props.history.push('/');
         }
         else
             this.props.history.push('/register');
@@ -138,7 +138,7 @@ class Login extends React.Component{
 
                         <button id="regBtn" type="button" className="btn btn-info btn-block" onClick={this.register}>Sign up
                         </button>
-                        <button id="loginBtn" type="button" className="btn btn-warning btn-block" onClick={() => {this.props.history.push('/login')}}>Already registered? Sign in
+                        <button id="loginBtn" type="button" className="btn btn-warning btn-block" onClick={() => {this.props.history.push('/')}}>Already registered? Sign in
                         </button>
                     </div>
                 </form>
