@@ -23,7 +23,12 @@ class Login extends React.Component{
     componentDidMount() {
         this.userService.profile()
             .then((user) => {
-               this.setState({user: user})
+                if(user!==null)
+                    this.setState({user: user})
+                else {
+                    alert('no active session found')
+                    this.props.history.push('/login')
+                }
             })
     }
 

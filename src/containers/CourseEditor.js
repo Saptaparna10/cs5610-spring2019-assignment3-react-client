@@ -3,7 +3,7 @@ import CourseService from '../services/CourseService'
 import ModuleList from './ModuleList'
 import LessonTabs from './LessonTabs'
 import TopicPills from './TopicPills'
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
@@ -14,14 +14,17 @@ import Toggle from "react-toggle";
 import ModuleService from "../services/ModuleService";
 import LessonService from "../services/LessonService";
 import TopicService from "../services/TopicService";
+import UserService from "../services/UserService";
 
-export default class CourseEditor
+class CourseEditor
     extends React.Component{
 
     constructor(props){
         super(props);
         this.selectCourse = this.selectCourse.bind(this);
         this.populateTitle = this.populateTitle.bind(this);
+        this.logout = this.logout.bind(this);
+        this.userService = new UserService();
         this.courseService = new CourseService();
         this.ModuleService = new ModuleService();
         this.LessonService = new LessonService();
@@ -87,6 +90,13 @@ export default class CourseEditor
     componentWillReceiveProps(newProps){
         this.selectCourse
         (newProps.match.params.courseId);
+    }
+
+    logout(){
+        this.userService.logout()
+            .then(() => {
+                this.props.history.push('/login')
+            })
     }
 
 
@@ -276,7 +286,8 @@ export default class CourseEditor
 
     findAllLessonsForModule(){
         this.LessonService.findAllLessonsForModule(this.state.module.id)
-            .then((lessons) => this.setState({lessons: lessons}))
+            .then((lessons) => {this.setState({lessons: lessons})
+                                this.setState({lesson: lessons[0]})})
     }
 
     /** ---------Topics-----------**/
@@ -369,10 +380,20 @@ export default class CourseEditor
                         <button className="btn btn-dark btn-block"><i className="fa fa-times"  aria-hidden="true"></i></button>
                     </Link>
                     <a href='#' className='logo'> Course Editor: {this.state.course.title}</a>
+
                 </div>
                 <div className="row bg-dark">
-                    &nbsp;
                 </div>
+                <div className="row pull-right">
+                    <button
+                        onClick={this.logout}
+                        className='btn btn-danger'
+                        id='toggleBtn'>
+                        <i className='fa fa-power-off'></i>
+                    </button>
+
+                </div>
+
                 <div className="row longcol">
                     <div className="col-md-4 bg-dark d-none d-md-block " >
                             <ModuleList
@@ -389,7 +410,12 @@ export default class CourseEditor
                     </div>
                         <div className="col-md-8">
                             <div>&nbsp;</div>
-
+                            <div>
+                                &nbsp;
+                            </div>
+                            <div>
+                                &nbsp;
+                            </div>
                             <LessonTabs
                                     moduleid={this.state.module.id}
                                     courseId={this.state.course.id}
@@ -442,12 +468,12 @@ export default class CourseEditor
                                         {/*widgets={this.state.widgets}/>*/}
                                 {/*</Provider>*/}
 
-                            <Provider store={store}>
-                                <WidgetListContainer
-                                widgets={this.state.widgets}
-                                // deleteWidget={this.deleteWidget}
-                                />
-                            </Provider>
+                            {/*<Provider store={store}>*/}
+                                {/*<WidgetListContainer*/}
+                                {/*widgets={this.state.widgets}*/}
+                                {/*// deleteWidget={this.deleteWidget}*/}
+                                {/*/>*/}
+                            {/*</Provider>*/}
                         </div>
 
                 </div>
@@ -456,5 +482,7 @@ export default class CourseEditor
         )
     }
 }
+
+export default withRouter(CourseEditor);
 
 

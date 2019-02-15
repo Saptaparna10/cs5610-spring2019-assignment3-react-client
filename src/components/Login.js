@@ -30,7 +30,13 @@ class Login extends React.Component{
     }
 
     login(){
-        this.userService.login(this.state.user,this.redirect)
+        this.userService.login(this.state.user)
+            .then((user) => {
+                if(user!=null)
+                    this.redirect(user)
+                else
+                    alert('Wrong username/password!')
+            })
     }
 
     redirect(user){
@@ -54,6 +60,7 @@ class Login extends React.Component{
                 <div>
                     &nbsp;
                 </div>
+
                 <div>
                     &nbsp;
                 </div>

@@ -12,7 +12,7 @@ class Login extends React.Component{
                 password : '',
                 firstName : '',
                 lastName : '',
-                role : ''
+                role : 'Faculty'
             }
 
         }
@@ -42,7 +42,9 @@ class Login extends React.Component{
         this.state.user.lastName = event.target.value
     }
     roleChanged(event) {
-        this.state.user.role = event.target.value
+        const user = this.state.user
+        user.role = event.target.value
+        this.setState({user: user})
     }
 
     register(){
@@ -50,8 +52,9 @@ class Login extends React.Component{
     }
 
     redirect(user){
-        if(user!=null)
+        if(user!=null) {
             this.props.history.push('/login');
+        }
         else
             this.props.history.push('/register');
 
@@ -96,7 +99,8 @@ class Login extends React.Component{
                         <div className="col-sm-10">
                             <input type="password" className="form-control wbdv-password-fld"
                                    id="password"
-                                   onChange={this.passwordChanged}/>
+                                   onChange={this.passwordChanged}
+                            />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -123,8 +127,7 @@ class Login extends React.Component{
                         <label htmlFor="username" className="col-sm-2 col-form-label">
                             Role </label>
                         <div className="col-sm-10">
-                            <select onClick={this.roleChanged}>
-                                <option value="admin">Admin</option>
+                            <select onChange={this.roleChanged} value={this.state.user.role}>
                                 <option value="Faculty">Faculty</option>
                                 <option value="Student">Student</option>
                             </select>

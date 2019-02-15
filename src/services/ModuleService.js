@@ -4,7 +4,14 @@ class ModuleService {
 
     addModule(cid, module){
         //course.id = (new Date()).getTime()
+        if(module==null || module=="" || module.title === '')
+            alert('Module name cannot be empty')
+
+        if(module.title=='')
+            module.title = 'New Module'
+
         return fetch(constants.BASE_URL+'/api/courses/'+cid+'/modules', {
+            'credentials': 'include',
             method : 'post',
             body : JSON.stringify(module),
             headers : {
@@ -16,7 +23,9 @@ class ModuleService {
     }
 
     findAllModulesForCourse(cid){
-        return fetch(constants.BASE_URL+'/api/courses/'+cid+'/modules')
+        return fetch(constants.BASE_URL+'/api/courses/'+cid+'/modules',{
+            'credentials': 'include'
+        })
             .then(function (response) {
                 return response.json();
             });
@@ -24,6 +33,7 @@ class ModuleService {
 
     deleteModule(deleteModule){
         return fetch(constants.BASE_URL + '/api/modules/' + deleteModule.id, {
+            'credentials': 'include',
             method: 'delete'
         }).then(function (response) {
             return response;
@@ -35,8 +45,15 @@ class ModuleService {
         // selectedCourse.title = newCourse.title;
         // this.courses[foundIndex] = selectedCourse;
         // return this.courses
+        if(newModule==null || newModule=="" || newModule.title === '')
+            alert('Module name cannot be empty')
+
+        if(newModule.title=='')
+            newModule.title = 'New Module'
+
         selectedModule.title = newModule.title
         return fetch(constants.BASE_URL + '/api/modules/' + selectedModule.id, {
+            'credentials': 'include',
             method: 'put',
             body: JSON.stringify(selectedModule),
             headers: {'Content-Type': 'application/json'}
@@ -46,7 +63,9 @@ class ModuleService {
     }
 
     findModuleById(modId, callback){
-        return fetch(constants.BASE_URL+'/api/modules/'+ modId)
+        return fetch(constants.BASE_URL+'/api/modules/'+ modId,{
+            'credentials': 'include'
+        })
             .then(function (response) {
                 if(response.headers.get("content-type")!=null)
                     return response.json();

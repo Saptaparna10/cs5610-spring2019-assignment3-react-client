@@ -1,8 +1,14 @@
 import * as constants from "./../constants/index"
+import React from "react";
 
 class UserService {
 
-    login(user, callback){
+    login(user){
+        if(user.username == '')
+            alert('username cannot be empty')
+        if(user.password == '')
+            alert('password cannot be empty')
+        
         return fetch(constants.BASE_URL+'/api/login',{
             method:'POST',
             body:JSON.stringify(user),
@@ -15,13 +21,20 @@ class UserService {
                 return response.json();
             }
             else {
-                alert('Wrong username/password!')
                 return null;
             }
-        }).then(callback);
+        }).catch(err => {
+            console.log(err)
+            return null;
+        })
     }
 
     register(user, callback){
+        if(user.username == '')
+            alert('username cannot be empty')
+        if(user.password == '')
+            alert('password cannot be empty')
+
         return fetch(constants.BASE_URL+'/api/register',{
             method:'POST',
             body:JSON.stringify(user),
@@ -31,9 +44,17 @@ class UserService {
             }
         }).then(function (response) {
             if(response.headers.get("content-type")!=null) {
+                alert('Registration successful. Please log in to view courses!')
                 return response.json();
             }
-        }).then(callback);
+            else{
+                alert('username already taken')
+            }
+
+        }).catch(err => {
+            console.log(err)
+        })
+            .then(callback);
     }
 
     profile(){
@@ -43,6 +64,9 @@ class UserService {
         .then(function (response) {
             if(response.headers.get("content-type")!=null) {
                 return response.json();
+            }
+            else{
+                return null
             }
         })
     }

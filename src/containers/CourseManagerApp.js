@@ -4,13 +4,17 @@ import CourseService from '../services/CourseService'
 import CourseEditor from './CourseEditor';
 import CourseGrid from './CourseGrid'
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import UserService from "../services/UserService";
 
-export default class CourseManager
+class CourseManager
     extends Component{
 
     constructor(props) {
         super(props);
+        this.logout = this.logout.bind(this);
         this.courseService = new CourseService();
+        this.userService = new UserService();
         this.toggleView = this.toggleView.bind(this);
         this.titleChanged = this.titleChanged.bind(this);
         this.addCourse = this.addCourse.bind(this);
@@ -27,15 +31,20 @@ export default class CourseManager
     }
 
     componentDidMount(){
-        this.findAllCourses();
+        this.findAllCourses()
+
     }
 
     findAllCourses(){
         this.courseService
             .findAllCourses()
             .then((courses) => {
-                this.setState({courses : courses});
+                if(courses!=null)
+                    this.setState({courses : courses});
+                else
+                    this.props.history.push('/login');
             })
+
     }
 
     titleChanged(event) {
@@ -69,13 +78,16 @@ export default class CourseManager
     }
 
     addCourse(){
-        // const courses = this.courseService.addCourse(this.state.newCourse);
-        // document.getElementById('titleFld').value=''
-        // this.setState({courses: courses});
         this.courseService
             .addCourse(this.state.newCourse)
-            .then(() => {this.findAllCourses(); })
+            .then((course) => {
+                if(course!=null)
+                    this.findAllCourses();
+                else
+                    this.props.history.push('/login');
+            })
             .then(() => {document.getElementById('titleFld').value=''})
+            .then(() => this.state.newCourse='')
     }
 
     deleteCourse(course){
@@ -83,7 +95,12 @@ export default class CourseManager
         // this.setState({courses: courses});
         this.courseService
             .deleteCourse(course)
-            .then(() => {this.findAllCourses(); });
+            .then((course) => {
+                if(course!=null)
+                    this.findAllCourses();
+                else
+                    this.props.history.push('/login');
+            })
     }
 
     editCourse(course){
@@ -98,9 +115,22 @@ export default class CourseManager
         // this.setState({courses: courses});
         this.courseService
             .updateCourse(this.state.course, this.state.newCourse)
-            .then(() => {this.findAllCourses(); })
+            .then((course) => {
+                if(course!=null)
+                    this.findAllCourses();
+                else
+                    this.props.history.push('/login');
+            })
             .then(() => {document.getElementById('titleFld').value=''})
     }
+
+    logout(){
+        this.userService.logout()
+            .then(() => {
+                this.props.history.push('/login')
+            })
+    }
+
 
     renderView(){
         if(this.state.view === 'list'){
@@ -156,6 +186,14 @@ export default class CourseManager
                                     <i className='fa fa-th'></i>
                                 </button>
                             </th>
+
+                            <th>
+                                <button onClick={this.logout}
+                                        className='btn btn-danger'
+                                        id='toggleBtn'>
+                                    <i className='fa fa-power-off'></i>
+                                </button>
+                            </th>
                         </tr>
                         </thead>
                     </table>
@@ -165,3 +203,5 @@ export default class CourseManager
         )
     }
 }
+
+export default withRouter(CourseManager);

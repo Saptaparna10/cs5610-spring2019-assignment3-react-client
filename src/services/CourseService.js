@@ -5,38 +5,29 @@ class CourseService {
     constructor() {
         this.courses = courses;
     }
-    // addCourse = course => {
-    //     if(course === null) {
-    //         course = {
-    //             id :(new Date()).getTime(),
-    //                 title:'New Course',
-    //                 modules:[{
-    //                 title: '',
-    //                 lessons: [{
-    //                     title:'',
-    //                     topics:[{
-    //                         title:''
-    //                     }]
-    //                 }]
-    //             }]
-    //         }
-    //
-    //     }
-    //     course.id = (new Date()).getTime()
-    //     this.courses.push(course)
-    //     return this.courses
-    // }
 
     addCourse(course){
+        if(course==null || course=='' || course.title === '') {
+            alert('Course name cannot be empty')
+        }
+        if(course.title=="")
+            course.title = 'New course'
         //course.id = (new Date()).getTime()
         return fetch(constants.BASE_URL+'/api/courses', {
             method : 'post',
+            'credentials': 'include',
             body : JSON.stringify(course),
             headers : {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            return response.json();
+            if(response.headers.get("content-type")!=null) {
+                return response.json();
+            }
+            else {
+                alert('No active session found')
+                return null;
+            }
         })
     }
 
@@ -45,7 +36,10 @@ class CourseService {
     //         course => course.id == courseId
     //     )
     findCourseById(courseId, callback){
-        return fetch(constants.BASE_URL+'/api/courses/'+ courseId)
+        return fetch(constants.BASE_URL+'/api/courses/'+ courseId,{
+                'credentials': 'include'
+            }
+            )
             .then(function (response) {
                 if(response.headers.get("content-type")!=null)
                     return response.json();
@@ -57,9 +51,18 @@ class CourseService {
     // findAllCourses = () =>
     //     this.courses;
     findAllCourses(){
-        return fetch(constants.BASE_URL+'/api/courses')
+        return fetch(constants.BASE_URL+'/api/courses',{
+                'credentials': 'include'
+            }
+            )
             .then(function (response) {
-                return response.json();
+                if(response.headers.get("content-type")!=null) {
+                    return response.json();
+                }
+                else {
+                    alert('No active session found')
+                    return null;
+                }
             });
     }
 
@@ -69,9 +72,16 @@ class CourseService {
     //     )
     deleteCourse(deleteCourse){
         return fetch(constants.BASE_URL + '/api/courses/' + deleteCourse.id, {
+            'credentials': 'include',
             method: 'delete'
         }).then(function (response) {
-            return response;
+            if(response.headers.get("content-type")!=null) {
+                return response.json();
+            }
+            else {
+                alert('No active session found')
+                return null;
+            }
         })
     }
 
@@ -80,13 +90,26 @@ class CourseService {
         // selectedCourse.title = newCourse.title;
         // this.courses[foundIndex] = selectedCourse;
         // return this.courses
+        if(newCourse==null || newCourse=='' || newCourse.title === '') {
+            alert('Course name cannot be empty')
+        }
+        if(newCourse.title=="")
+            newCourse.title = 'New course'
+
         selectedCourse.title = newCourse.title
         return fetch(constants.BASE_URL + '/api/courses/' + selectedCourse.id, {
+            'credentials': 'include',
             method: 'put',
             body: JSON.stringify(selectedCourse),
             headers: {'Content-Type': 'application/json'}
         }).then(function (response) {
-            return response;
+            if(response.headers.get("content-type")!=null) {
+                return response.json();
+            }
+            else {
+                alert('No active session found')
+                return null;
+            }
         })
     }
 
