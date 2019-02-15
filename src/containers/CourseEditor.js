@@ -15,6 +15,7 @@ import ModuleService from "../services/ModuleService";
 import LessonService from "../services/LessonService";
 import TopicService from "../services/TopicService";
 import UserService from "../services/UserService";
+import WidgetListStatic from '../components/WidgetListStatic'
 
 class CourseEditor
     extends React.Component{
@@ -376,7 +377,7 @@ class CourseEditor
             <div>
                 <div className="row bg-dark">
 
-                    <Link to={`/`}>
+                    <Link to={`/courses`}>
                         <button className="btn btn-dark btn-block"><i className="fa fa-times"  aria-hidden="true"></i></button>
                     </Link>
                     <a href='#' className='logo'> Course Editor: {this.state.course.title}</a>
@@ -446,18 +447,19 @@ class CourseEditor
 
                             <div>&nbsp;</div>
 
-                            {/*<div className="row">*/}
+                            <div className="row">
 
-                                {/*<div className="col text-right">*/}
-                                        {/*<button className="btn btn-success">Save</button>*/}
-                                        {/*<i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>*/}
-                                        {/*Preview*/}
-                                {/*</div>*/}
+                                <div className="col text-right">
+                                        <button className="btn btn-success">Save</button>
+                                        <i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>
+                                        Preview
+                                </div>
 
-                            {/*</div>*/}
+                            </div>
                             <div>
                                 &nbsp;
                             </div>
+                            <WidgetListStatic/>
 
                                 {/*<Provider store={store}>*/}
                                     {/*<App*/}
