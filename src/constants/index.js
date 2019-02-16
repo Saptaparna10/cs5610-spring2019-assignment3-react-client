@@ -17,5 +17,5 @@ export const MOVE_UP='MOVE_UP'
 export const FIND_WIDGETS='FIND_WIDGETS'
 
 export const BASE_URL =
-//'https://damp-earth-67754.herokuapp.com'
-'http://localhost:8080'
+'https://damp-earth-67754.herokuapp.com'
+//'http://localhost:8080'
