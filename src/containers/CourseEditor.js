@@ -24,6 +24,7 @@ class CourseEditor
         super(props);
         this.selectCourse = this.selectCourse.bind(this);
         this.populateTitle = this.populateTitle.bind(this);
+        this.profile = this.profile.bind(this);
         this.logout = this.logout.bind(this);
         this.userService = new UserService();
         this.courseService = new CourseService();
@@ -91,6 +92,13 @@ class CourseEditor
     componentWillReceiveProps(newProps){
         this.selectCourse
         (newProps.match.params.courseId);
+    }
+
+    profile(){
+        this.userService.profile()
+            .then(() => {
+                this.props.history.push('/profile')
+            })
     }
 
     logout(){
@@ -383,17 +391,7 @@ class CourseEditor
                     <a href='#' className='logo'> Course Editor: {this.state.course.title}</a>
 
                 </div>
-                <div className="row bg-dark">
-                </div>
-                <div className="row pull-right">
-                    <button
-                        onClick={this.logout}
-                        className='btn btn-danger'
-                        id='toggleBtn'>
-                        <i className='fa fa-power-off'></i>
-                    </button>
 
-                </div>
 
                 <div className="row longcol">
                     <div className="col-md-4 bg-dark d-none d-md-block " >
@@ -411,12 +409,28 @@ class CourseEditor
                     </div>
                         <div className="col-md-8">
                             <div>&nbsp;</div>
+                            <span className='pull-right'>
+                                <button onClick={this.profile}
+                                        className='btn btn-info'
+                                        id='profile'>
+                                    <i className="fa fa-user" aria-hidden="true"></i>
+                                </button>
+
+                                <button
+                                    onClick={this.logout}
+                                    className='btn btn-danger'
+                                    id='toggleBtn'>
+                                    <i className='fa fa-power-off'></i>
+                                </button>
+
+                            </span>
+                            <div>&nbsp;</div>
+                            <div>&nbsp;</div>
+
                             <div>
                                 &nbsp;
                             </div>
-                            <div>
-                                &nbsp;
-                            </div>
+                            {(this.state.modules != null && this.state.modules !== null && this.state.modules.length > 0) ?
                             <LessonTabs
                                     moduleid={this.state.module.id}
                                     courseId={this.state.course.id}
@@ -428,10 +442,11 @@ class CourseEditor
                                     editLesson={this.editLesson}
                                     lessons={this.state.lessons}
 
-                            />
+                            />:null}
 
                             <div>&nbsp;</div>
 
+                            {(this.state.lessons != null && this.state.lessons !== null && this.state.lessons.length > 0) ?
                             <TopicPills
                                 courseId={this.state.course.id}
                                 moduleId={this.state.module.id}
@@ -443,7 +458,7 @@ class CourseEditor
                                 deleteTopic={this.deleteTopic}
                                 updateTopic={this.updateTopic}
                                 editTopic={this.editTopic}
-                            />
+                            />:null}
 
                             <div>&nbsp;</div>
 

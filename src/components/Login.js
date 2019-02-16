@@ -68,7 +68,7 @@ class Login extends React.Component{
                     &nbsp;
                 </div>
                 <div>
-                    &nbsp;
+                    <h2>Login</h2>
                 </div>
                 <div>
                     &nbsp;

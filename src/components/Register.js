@@ -77,7 +77,7 @@ class Login extends React.Component{
                     &nbsp;
                 </div>
                 <div>
-                    &nbsp;
+                    <h2>Register</h2>
                 </div>
                 <div>
                     &nbsp;

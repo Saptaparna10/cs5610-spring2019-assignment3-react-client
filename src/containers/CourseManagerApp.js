@@ -12,6 +12,7 @@ class CourseManager
 
     constructor(props) {
         super(props);
+        this.profile = this.profile.bind(this);
         this.logout = this.logout.bind(this);
         this.courseService = new CourseService();
         this.userService = new UserService();
@@ -131,6 +132,12 @@ class CourseManager
             })
     }
 
+    profile(){
+        this.userService.profile()
+            .then(() => {
+                this.props.history.push('/profile')
+            })
+    }
 
     renderView(){
         if(this.state.view === 'list'){
@@ -188,9 +195,17 @@ class CourseManager
                             </th>
 
                             <th>
+                                <button onClick={this.profile}
+                                        className='btn btn-info'
+                                        id='profile'>
+                                    <i className="fa fa-user" aria-hidden="true"></i>
+                                </button>
+                            </th>
+
+                            <th>
                                 <button onClick={this.logout}
                                         className='btn btn-danger'
-                                        id='toggleBtn'>
+                                        id='logout'>
                                     <i className='fa fa-power-off'></i>
                                 </button>
                             </th>
