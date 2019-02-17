@@ -222,6 +222,7 @@ class CourseEditor
     findAllModulesForCourse(){
         this.ModuleService.findAllModulesForCourse(this.state.courseId)
             .then((modules) => this.setState({modules: modules}))
+            .then(() => this.setState({module: this.state.modules[0]}))
     }
 
     /** ---------Lessons-----------**/
@@ -295,8 +296,8 @@ class CourseEditor
 
     findAllLessonsForModule(){
         this.LessonService.findAllLessonsForModule(this.state.module.id)
-            .then((lessons) => {this.setState({lessons: lessons})
-                                this.setState({lesson: lessons[0]})})
+            .then((lessons) => this.setState({lessons: lessons}))
+                .then(() =>  this.setState({lesson: this.state.lessons[0]}))
     }
 
     /** ---------Topics-----------**/
@@ -356,6 +357,7 @@ class CourseEditor
     findAllTopicsForLesson(){
         this.TopicService.findAllTopicsForLesson(this.state.lesson.id)
             .then((topics) => this.setState({topics: topics}))
+            .then(() => this.setState({topic: this.state.topics[0]}))
     }
 
     /**----------Widgets-------------**/
@@ -368,17 +370,17 @@ class CourseEditor
 
     /**------------Render--------------**/
     render(){
-        let initialState = {
-            widgets: this.state.widgets,
-            preview: false,
-            nonUniqueName: false,
-            courseId: this.state.course.id,
-            moduleId: this.state.module.id,
-            lessonId: this.state.lesson.id,
-            topicId: this.state.topic.id
-        }
+        // let initialState = {
+        //     widgets: this.state.widgets,
+        //     preview: false,
+        //     nonUniqueName: false,
+        //     courseId: this.state.course.id,
+        //     moduleId: this.state.module.id,
+        //     lessonId: this.state.lesson.id,
+        //     topicId: this.state.topic.id
+        // }
 
-        let store = createStore(widgetReducer, initialState);
+        //let store = createStore(widgetReducer, initialState);
         // const store = createStore(widgetReducer);
 
         return (
