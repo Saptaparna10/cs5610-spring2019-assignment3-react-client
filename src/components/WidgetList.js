@@ -8,7 +8,7 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                         widgetTextChanged, widgetNameChanged, headingSizeChanged, nonUniqueName, nonUniqueWidgetId,
                         listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged}) =>
     <div
-        // onLoad={findWidgets()}
+         // onLoad={findWidgets()}
     >
         <div className="row">
             <div className="col">
@@ -33,6 +33,7 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                 widgets.map((widget, index) =>
 
                     <WidgetComponent
+                        //topicId={topicId}
                         key={widget.id}
                         updateWidget={updateWidget}
                         deleteWidget={deleteWidget}
@@ -57,8 +58,8 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
             }
             <div className="row">
                 <div className="col">
-                    <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
-                       onClick={addWidget}></i>
+                       <i className="btn btn-success fa fa fa-plus float-right" title="Add widget" onClick={addWidget}
+                       ></i>
                 </div>
             </div>
         </div>

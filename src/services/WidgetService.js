@@ -1,5 +1,6 @@
 import widgets from '../resources/widgets'
 import courses from '../resources/courses.json'
+import * as constants from "../constants";
 
 let _singleton = Symbol();
 
@@ -19,23 +20,47 @@ class WidgetServiceClient {
       return widgets;
     }
 
-    createWidget(courseId,moduleId,lessonId,topicId,widget) {
-        return {
-            widgets: [
-                ...widgets,
-                {
-                    type: 'HEADING',
-                    text: 'New Widget',
-                    size: 1
-                }
-            ]
-        }
+    createWidget(topicId,widget) {
+        // return {
+        //     widgets: [
+        //         ...widgets,
+        //         {
+        //             type: 'HEADING',
+        //             text: 'New Widget',
+        //             size: 1
+        //         }
+        //     ]
+        // }
+        if(widget==null || widget=='' || widget.title === '')
+            alert('widget name cannot be empty')
+
+        if(widget.title=='')
+            widget.title = 'New widget'
+
+        return fetch(constants.BASE_URL+'/api/topics/'+topicId+'/widgets', {
+            'credentials': 'include',
+            method : 'post',
+            body : JSON.stringify(widget),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
     }
 
-    deleteWidget(widgetId,callback) {
-        return {
-            widgets: widgets.filter(widget => widget.id !== widgetId)
-        }
+    deleteWidget(widgetId, topicId) {
+        // return {
+        //     widgets: widgets.filter(widget => widget.id !== widgetId)
+        // }
+
+        return fetch(constants.BASE_URL + '/api/topics/'+ topicId + '/widgets/' + widgetId, {
+            'credentials': 'include',
+            method: 'delete'
+        })
+            .then(function (response) {
+            return response.json();
+        })
     }
 
     findWidgetById(widgetId) {
@@ -49,8 +74,14 @@ class WidgetServiceClient {
         });
     }
 
-    findAllWidgetsForTopic(courseId,moduleId,lessonId,topicId) {
-        return widgets;
+    findAllWidgetsForTopic(topicId) {
+        return fetch(constants.BASE_URL+'/api/topics/'+topicId+'/widgets',{
+            'credentials': 'include'
+        })
+            .then(function (response) {
+                return response.json();
+            });
+        // return widgets;
     }
 
     updateWidget(widgetId,widget) {

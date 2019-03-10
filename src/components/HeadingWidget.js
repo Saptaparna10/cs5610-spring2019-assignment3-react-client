@@ -51,7 +51,7 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <div className="col-sm-10">
                             <input className="form-control" id="headingText"
                                    onChange={() => widgetTextChanged(widget.id, inputElemHead.value)}
-                                   value={widget.text}
+                                   defaultValue={widget.text}
                                    ref={node => inputElemHead = node} placeholder="Heading Text"/>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <div className="col-sm-10">
                             <select className="form-control" id="headingSize"
                                     onChange={() => headingSizeChanged(widget.id, selectElem.value)}
-                                    value={widget.size}
+                                    defaultValue={widget.size}
                                     ref={node => selectElem = node}>
                                 <option value="1">Heading 1</option>
                                 <option value="2">Heading 2</option>
@@ -73,7 +73,7 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName"
                                    onChange={() => widgetNameChanged(widget.id, inputNameElemHead.value)}
-                                   value={name}
+                                   defaultValue={name}
                                    ref={node => inputNameElemHead = node} placeholder="Widget Name"/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&
                             <div className="alert alert-danger mt-2" role="alert">

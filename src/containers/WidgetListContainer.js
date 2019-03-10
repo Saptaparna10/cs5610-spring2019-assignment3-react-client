@@ -7,25 +7,28 @@ import * as actions from '../actions'
 
 const stateToPropertyMapper = state => ({
     widgets: state.widgets,
-    previewMode: state.preview,
-    disableUp: false,
-    disableDown: false,
-    nonUniqueName: state.nonUniqueName,
-    nonUniqueWidgetId: state.nonUniqueWidgetId
+    // previewMode: state.preview,
+    // disableUp: false,
+    // disableDown: false,
+    // nonUniqueName: state.nonUniqueName,
+    // nonUniqueWidgetId: state.nonUniqueWidgetId,
+    //topicId: state.topicId
 })
 
-const dispatchToPropertyMapper = (dispatch, props) => ({
+const dispatchToPropertyMapper = (dispatch) => ({
 
     addWidget: () =>
         dispatch({
-            type: 'ADD_WIDGET'
+            type: 'ADD_WIDGET_NEW',
+            //topicId: props.topicId
         }),
 
-    deleteWidget: widget => {
+    deleteWidget: (widget) => {
         // props.deleteWidget(widget);
         dispatch({
             type: DELETE_WIDGET,
-            id: widget.id
+            id: widget.id,
+            //topicId: props.topicId
         })
     },
 
@@ -38,7 +41,7 @@ const dispatchToPropertyMapper = (dispatch, props) => ({
     findWidgets: () =>
         dispatch({
             type: 'FIND_WIDGETS',
-            widgets: props.widgets
+            //widgets: props.widgets
         }),
 
     selectWidgetType: (widget,selectElement) =>

@@ -124,7 +124,7 @@ class CourseEditor
                                                                             lessons: course.modules[0].lessons});
         if(this.state.lessons!=null && this.state.lessons.length>0) this.setState({topics: this.state.lessons[0].topics})
         if(this.state.topics!=null && this.state.topics.length>0) this.setState({topic: this.state.topics[0]})
-        //if(this.state.topic.widgets!=null && this.state.topics.widgets>0) this.setState({widgets: this.state.topic.widgets})
+        if(this.state.topic.widgets!=null && this.state.topics.widgets>0) this.setState({widgets: this.state.topic.widgets})
 
         //document.getElementById('form1').style.display="none";
         //document.getElementById('title').style.display='';
@@ -177,6 +177,15 @@ class CourseEditor
         else{
             this.setState({
                 topic: ''})
+        }
+
+        if(this.state.topic!=null && this.state.topic.widgets!=null && this.state.topic.widgets.length>0){
+            this.setState({
+                widgets: this.state.topic.widgets})
+        }
+        else{
+            this.setState({
+                widget: ''})
         }
     }
 
@@ -304,7 +313,7 @@ class CourseEditor
     selectTopic = topic =>
         this.setState({
             topic: topic,
-            //widgets: topic.widgets
+            widgets: topic.widgets
         })
 
     topicTitleChanged(event) {
@@ -356,8 +365,11 @@ class CourseEditor
 
     findAllTopicsForLesson(){
         this.TopicService.findAllTopicsForLesson(this.state.lesson.id)
-            .then((topics) => this.setState({topics: topics}))
-            .then(() => this.setState({topic: this.state.topics[0]}))
+            //.then((topics) => this.setState({topics: topics}))
+            //.then(() => this.setState({topic: this.state.topics[0]}))
+            .then((topics) => this.setState({topics: topics,
+                topic: this.state.topics[0]
+            }))
     }
 
     /**----------Widgets-------------**/
@@ -370,18 +382,21 @@ class CourseEditor
 
     /**------------Render--------------**/
     render(){
-        // let initialState = {
-        //     widgets: this.state.widgets,
-        //     preview: false,
-        //     nonUniqueName: false,
-        //     courseId: this.state.course.id,
-        //     moduleId: this.state.module.id,
-        //     lessonId: this.state.lesson.id,
-        //     topicId: this.state.topic.id
-        // }
+        console.log('---'+ this.state.topic.id)
+        let initialState = {
+            widgets: this.state.widgets,
 
-        //let store = createStore(widgetReducer, initialState);
-        // const store = createStore(widgetReducer);
+            //preview: false,
+            //nonUniqueName: false,
+            // courseId: this.state.course.id,
+            // moduleId: this.state.module.id,
+            // lessonId: this.state.lesson.id,
+            topicId: this.state.topic.id
+            //widgets:[]
+        }
+
+        const store = createStore(widgetReducer, initialState);
+        //const store = createStore(widgetReducer);
 
         return (
             <div>
@@ -464,19 +479,19 @@ class CourseEditor
 
                             <div>&nbsp;</div>
 
-                            <div className="row">
+                            {/*<div className="row">*/}
 
-                                <div className="col text-right">
-                                        <button className="btn btn-success">Save</button>
-                                        <i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>
-                                        Preview
-                                </div>
+                                {/*<div className="col text-right">*/}
+                                        {/*<button className="btn btn-success">Save</button>*/}
+                                        {/*<i className="fa fa-w-2 fa-toggle-on" aria-hidden="true"></i>*/}
+                                        {/*Preview*/}
+                                {/*</div>*/}
 
-                            </div>
-                            <div>
-                                &nbsp;
-                            </div>
-                            <WidgetListStatic/>
+                            {/*</div>*/}
+                            {/*<div>*/}
+                                {/*&nbsp;*/}
+                            {/*</div>*/}
+                            {/*<WidgetListStatic/>*/}
 
                                 {/*<Provider store={store}>*/}
                                     {/*<App*/}
@@ -487,12 +502,13 @@ class CourseEditor
                                         {/*widgets={this.state.widgets}/>*/}
                                 {/*</Provider>*/}
 
-                            {/*<Provider store={store}>*/}
-                                {/*<WidgetListContainer*/}
-                                {/*widgets={this.state.widgets}*/}
-                                {/*// deleteWidget={this.deleteWidget}*/}
-                                {/*/>*/}
-                            {/*</Provider>*/}
+                            <Provider store={store}>
+                                <WidgetListContainer
+                                // widgets={this.state.widgets}
+                                 //topicId={this.state.topic.id}
+                                // deleteWidget={this.deleteWidget}
+                                />
+                            </Provider>
                         </div>
 
                 </div>
