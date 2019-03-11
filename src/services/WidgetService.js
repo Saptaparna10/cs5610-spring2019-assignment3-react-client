@@ -90,6 +90,17 @@ class WidgetServiceClient {
                 w.id === widgetId ? widget : w
             )
         }
+
+        return fetch(constants.BASE_URL+'/api/widgets/{widgetId}', {
+            'credentials': 'include',
+            method : 'put',
+            body : JSON.stringify(widget),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
     }
 
 }

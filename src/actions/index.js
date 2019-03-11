@@ -67,9 +67,9 @@ export const findAllWidgetsForTopic = (dispatch, courseId, moduleId, lessonId, t
     var widgets = cs.findAllWidgetsForTopic(courseId, moduleId, lessonId, topicId);
 
     dispatch({
-                 widgets: widgets,
-                 type: constants.FIND_ALL_WIDGETS
-             });
+        widgets: widgets,
+        type: constants.FIND_ALL_WIDGETS
+    });
 }
 
 export const addWidget = dispatch => (

@@ -15,7 +15,6 @@ import ModuleService from "../services/ModuleService";
 import LessonService from "../services/LessonService";
 import TopicService from "../services/TopicService";
 import UserService from "../services/UserService";
-import WidgetListStatic from '../components/WidgetListStatic'
 
 class CourseEditor
     extends React.Component{
@@ -382,17 +381,15 @@ class CourseEditor
 
     /**------------Render--------------**/
     render(){
-        console.log('---'+ this.state.topic.id)
+        //console.log('---'+ this.state.topic.id)
         let initialState = {
             widgets: this.state.widgets,
-
-            //preview: false,
-            //nonUniqueName: false,
-            // courseId: this.state.course.id,
-            // moduleId: this.state.module.id,
-            // lessonId: this.state.lesson.id,
+            preview: false,
+            nonUniqueName: false,
+            courseId: this.state.course.id,
+            moduleId: this.state.module.id,
+            lessonId: this.state.lesson.id,
             topicId: this.state.topic.id
-            //widgets:[]
         }
 
         const store = createStore(widgetReducer, initialState);
@@ -504,8 +501,8 @@ class CourseEditor
 
                             <Provider store={store}>
                                 <WidgetListContainer
-                                // widgets={this.state.widgets}
-                                 //topicId={this.state.topic.id}
+                                 widgets={this.state.widgets}
+                                 topicId={this.state.topic.id}
                                 // deleteWidget={this.deleteWidget}
                                 />
                             </Provider>

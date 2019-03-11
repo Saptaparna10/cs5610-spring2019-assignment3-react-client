@@ -2,6 +2,7 @@ import * as constants from "./../constants/index"
 import WidgetServiceClient from "../services/WidgetService";
 import CourseService from "../services/CourseService";
 
+
 export const widgetReducer = (state, action) => {
 
 
@@ -55,8 +56,11 @@ export const widgetReducer = (state, action) => {
                     }
                     return Object.assign({}, widget)
                 }),
-
-             }
+                courseId: state.courseId,
+                moduleId: state.moduleId,
+                topicId: state.topicId,
+                lessonId: state.lessonId
+            }
 
         case constants.IMAGE_SRC_CHANGED:
             return {
@@ -171,11 +175,9 @@ export const widgetReducer = (state, action) => {
 
         case constants.DELETE_WIDGET:
             var newState = {
-                // widgets: state.widgets.filter(widget => (
-                //     widget.id !== action.id
-                // )),
-                widgets: widgetService.deleteWidget(action.id, action.topicId),
-
+                widgets: state.widgets.filter(widget => (
+                    widget.id !== action.id
+                )),
                 courseId: state.courseId,
                 moduleId: state.moduleId,
                 topicId: state.topicId,
@@ -233,36 +235,47 @@ export const widgetReducer = (state, action) => {
                 topicId: state.topicId,
                 lessonId: state.lessonId
             }
-        case constants.ADD_WIDGET_NEW:
+        case constants.ADD_WIDGET:
             // console.log();
 
             var orderOfWidget = 0;
             if (state.widgets.length > 0)
                 orderOfWidget = state.widgets[state.widgets.length - 1].orderOfWidget;
 
+            newState = {
+                widgets: [
 
-             return {
-                    widgets:  widgetService.createWidget(state.topicId,
-                        {
-                            //id: state.widgets.length + 1,
-                            text: '',
-                            type: 'HEADING',
-                            size: '3',
-                            orderOfWidget: ++orderOfWidget,
-                            name: ''
-                        }),
-                    topicId: state.topicId
-                    // courseId: state.courseId,
-                    // moduleId: state.moduleId,
-                    // topicId: state.topicId,
-                    // lessonId: state.lessonId
-             }
+                    {
+                        //id: state.widgets.length + 1,
+                        text: '',
+                        type: 'HEADING',
+                        size: '2',
+                        orderOfWidget: ++orderOfWidget,
+                        name: ''
+                    },
+                    ...state.widgets
+                ],
+                courseId: state.courseId,
+                moduleId: state.moduleId,
+                topicId: state.topicId,
+                lessonId: state.lessonId
+            }
 
-
+            return Object.assign({}, newState)
 
         case constants.FIND_WIDGETS:
             var newState = {
                 widgets: action.widgets
+            }
+            return Object.assign({}, newState)
+
+        case 'FIND_WIDGETS_TOPIC':
+            var newState = {
+                widgets: widgetService.findAllWidgetsForTopic(action.topicId),
+                courseId: state.courseId,
+                moduleId: state.moduleId,
+                topicId: state.topicId,
+                lessonId: state.lessonId
             }
             return Object.assign({}, newState)
 

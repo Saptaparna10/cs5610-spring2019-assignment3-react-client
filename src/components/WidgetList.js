@@ -4,11 +4,12 @@ import WidgetContainer from "./Widget";
 import Toggle from "react-toggle";
 
 
-const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, preview, previewMode, disableUp, disableDown,
+const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, findWidgetsTopic, preview, previewMode, disableUp, disableDown,
                         widgetTextChanged, widgetNameChanged, headingSizeChanged, nonUniqueName, nonUniqueWidgetId,
                         listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged}) =>
     <div
-         // onLoad={findWidgets()}
+        onLoad={() => findWidgetsTopic
+            .then((response)=> widgets=response)}
     >
         <div className="row">
             <div className="col">
@@ -23,17 +24,17 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                 </label>
 
                 {/*<button className="btn btn-success mr-3 float-right" hidden={preview}*/}
-                        {/*onClick={this.props.save} title="Save">*/}
-                    {/*Save*/}
+                {/*onClick={this.props.save} title="Save">*/}
+                {/*Save*/}
                 {/*</button>*/}
             </div>
         </div>
+        {(widgets != null && widgets !== null && widgets.length > 0) ?
         <div className="list-group">
             {
                 widgets.map((widget, index) =>
 
                     <WidgetComponent
-                        //topicId={topicId}
                         key={widget.id}
                         updateWidget={updateWidget}
                         deleteWidget={deleteWidget}
@@ -56,11 +57,13 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                     />
                 )
             }
-            <div className="row">
-                <div className="col">
-                       <i className="btn btn-success fa fa fa-plus float-right" title="Add widget" onClick={addWidget}
-                       ></i>
-                </div>
+
+        </div>
+            :null}
+        <div className="row">
+            <div className="col">
+                <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
+                   onClick={() => addWidget()}></i>
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         <h2 className="float-left d-none d-md-block ">{widget.type} Widget</h2>
                         <i className="btn btn-danger fa fa fa-times m-0 float-right " title="Update Topic Name"
                            onClick={() => deleteWidget(widget)}></i>
-                        <select className="form-control w-25 h-60 float-right m-0 mr-2 container-fluid" defaultValue={widget.type}
+                        <select className="form-control w-25 h-60 float-right m-0 mr-2 container-fluid" value={widget.type}
                                 onChange={() => selectWidgetType(widget, selectElement.value)}
                                 ref={node => selectElement = node}>
                             <option value='HEADING'>Heading</option>
@@ -45,46 +45,46 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                 </div>
                 <div>
                     {widget.type === 'HEADING' && <HeadingWidget
-                                                            preview={preview}
-                                                            widget={widget}
-                                                            widgetTextChanged={widgetTextChanged}
-                                                            headingSizeChanged={headingSizeChanged}
-                                                            widgetNameChanged={widgetNameChanged}
-                                                            nonUniqueName={nonUniqueName}
-                                                            nonUniqueWidgetId={nonUniqueWidgetId}/>}
+                        preview={preview}
+                        widget={widget}
+                        widgetTextChanged={widgetTextChanged}
+                        headingSizeChanged={headingSizeChanged}
+                        widgetNameChanged={widgetNameChanged}
+                        nonUniqueName={nonUniqueName}
+                        nonUniqueWidgetId={nonUniqueWidgetId}/>}
 
                     {widget.type === 'PARAGRAPH' && <ParagraphWidget
-                                                            preview={preview}
-                                                            widget={widget}
-                                                            widgetTextChanged={widgetTextChanged}
-                                                            widgetNameChanged={widgetNameChanged}
-                                                            nonUniqueName={nonUniqueName}
-                                                            nonUniqueWidgetId={nonUniqueWidgetId}
+                        preview={preview}
+                        widget={widget}
+                        widgetTextChanged={widgetTextChanged}
+                        widgetNameChanged={widgetNameChanged}
+                        nonUniqueName={nonUniqueName}
+                        nonUniqueWidgetId={nonUniqueWidgetId}
                     />}
                     {widget.type === 'LIST' && <ListWidget
-                                                            preview={preview}
-                                                            widget={widget}
-                                                            listItemsChanged={listItemsChanged}
-                                                            listTypeChanged={listTypeChanged}
-                                                            widgetNameChanged={widgetNameChanged}
-                                                            nonUniqueName={nonUniqueName}
-                                                            nonUniqueWidgetId={nonUniqueWidgetId}/>}
+                        preview={preview}
+                        widget={widget}
+                        listItemsChanged={listItemsChanged}
+                        listTypeChanged={listTypeChanged}
+                        widgetNameChanged={widgetNameChanged}
+                        nonUniqueName={nonUniqueName}
+                        nonUniqueWidgetId={nonUniqueWidgetId}/>}
 
                     {widget.type === 'IMAGE' && <ImageWidget
-                                                            preview={preview}
-                                                            widget={widget}
-                                                            imageURLChanged={imageURLChanged}
-                                                            widgetNameChanged={widgetNameChanged}
-                                                            nonUniqueName={nonUniqueName}
-                                                            nonUniqueWidgetId={nonUniqueWidgetId}/>}
+                        preview={preview}
+                        widget={widget}
+                        imageURLChanged={imageURLChanged}
+                        widgetNameChanged={widgetNameChanged}
+                        nonUniqueName={nonUniqueName}
+                        nonUniqueWidgetId={nonUniqueWidgetId}/>}
                     {widget.type === 'LINK' && <LinkWidget
-                                                            preview={preview}
-                                                            widget={widget}
-                                                            linkURLChanged={linkURLChanged}
-                                                            idgetNameChanged={widgetNameChanged}
-                                                            nonUniqueName={nonUniqueName}
-                                                            nonUniqueWidgetId={nonUniqueWidgetId}
-                                                            widgetTextChanged={widgetTextChanged}/>}
+                        preview={preview}
+                        widget={widget}
+                        linkURLChanged={linkURLChanged}
+                        idgetNameChanged={widgetNameChanged}
+                        nonUniqueName={nonUniqueName}
+                        nonUniqueWidgetId={nonUniqueWidgetId}
+                        widgetTextChanged={widgetTextChanged}/>}
                 </div>
             </div>
         </li>
