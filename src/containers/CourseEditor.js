@@ -392,7 +392,7 @@ class CourseEditor
             topicId: this.state.topic.id
         }
 
-        const store = createStore(widgetReducer, initialState);
+        const store = createStore(widgetReducer,initialState);
         //const store = createStore(widgetReducer);
 
         return (

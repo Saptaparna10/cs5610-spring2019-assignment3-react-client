@@ -4,12 +4,11 @@ import WidgetContainer from "./Widget";
 import Toggle from "react-toggle";
 
 
-const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, findWidgetsTopic, preview, previewMode, disableUp, disableDown,
+const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, preview, previewMode, disableUp, disableDown,
                         widgetTextChanged, widgetNameChanged, headingSizeChanged, nonUniqueName, nonUniqueWidgetId,
                         listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged}) =>
     <div
-        onLoad={() => findWidgetsTopic
-            .then((response)=> widgets=response)}
+        // onLoad={findWidgets()}
     >
         <div className="row">
             <div className="col">
@@ -29,7 +28,6 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                 {/*</button>*/}
             </div>
         </div>
-        {(widgets != null && widgets !== null && widgets.length > 0) ?
         <div className="list-group">
             {
                 widgets.map((widget, index) =>
@@ -57,13 +55,11 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
                     />
                 )
             }
-
-        </div>
-            :null}
-        <div className="row">
-            <div className="col">
-                <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
-                   onClick={() => addWidget()}></i>
+            <div className="row">
+                <div className="col">
+                    <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
+                       onClick={addWidget}></i>
+                </div>
             </div>
         </div>
     </div>

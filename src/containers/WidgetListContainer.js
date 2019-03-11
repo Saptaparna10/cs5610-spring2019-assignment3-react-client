@@ -18,7 +18,7 @@ const stateToPropertyMapper = state => ({
     lessonId: state.lessonId
 })
 
-const dispatchToPropertyMapper = (dispatch) => ({
+const dispatchToPropertyMapper = (dispatch, props) => ({
 
     addWidget: () =>
         dispatch({
