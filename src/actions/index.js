@@ -72,7 +72,7 @@ export const findAllWidgetsForTopic = (dispatch, courseId, moduleId, lessonId, t
     });
 }
 
-export const addWidget = dispatch => (
+export const addWidget = (dispatch) => (
     dispatch({type: constants.ADD_WIDGET})
 )
 export const save = dispatch => (

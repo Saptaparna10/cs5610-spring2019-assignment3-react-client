@@ -4,9 +4,9 @@ import WidgetContainer from "./Widget";
 import Toggle from "react-toggle";
 
 
-const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, preview, previewMode, disableUp, disableDown,
+const WidgetList = ({widgets, topicId, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, preview, previewMode, disableUp, disableDown,
                         widgetTextChanged, widgetNameChanged, headingSizeChanged, nonUniqueName, nonUniqueWidgetId,
-                        listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged}) =>
+                        listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged, dispatch}) =>
     <div
         // onLoad={findWidgets()}
     >
@@ -58,7 +58,20 @@ const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, selectWidge
             <div className="row">
                 <div className="col">
                     <i className="btn btn-success fa fa fa-plus float-right" title="Add widget"
-                       onClick={addWidget}></i>
+                       onClick={addWidget}
+                       // onClick={() => addWidget(topicId, widgets)}
+                       // onClick={e => {
+                       //     dispatch({type: 'ADD_WIDGET'})
+                       // }}
+                       //  onClick={() => addWidget( {
+                       //      //id: state.widgets.length + 1,
+                       //      text: '',
+                       //      type: 'HEADING',
+                       //      size: '2',
+                       //      orderOfWidget: 1,
+                       //      name: ''
+                       //  })}
+                    ></i>
                 </div>
             </div>
         </div>

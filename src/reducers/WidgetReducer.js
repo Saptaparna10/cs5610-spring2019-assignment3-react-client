@@ -242,8 +242,9 @@ export const widgetReducer = (state, action) => {
             if (state.widgets.length > 0)
                 orderOfWidget = state.widgets[state.widgets.length - 1].orderOfWidget;
 
-            newState = {
+            let qqq = {
                 widgets: [
+                    ...state.widgets,
 
                     {
                         //id: state.widgets.length + 1,
@@ -252,16 +253,33 @@ export const widgetReducer = (state, action) => {
                         size: '2',
                         orderOfWidget: ++orderOfWidget,
                         name: ''
-                    },
-                    ...state.widgets
+                    }
+
                 ],
+                previewMode: state.preview,
+                disableUp: false,
+                disableDown: false,
+                nonUniqueName: state.nonUniqueName,
+                nonUniqueWidgetId: state.nonUniqueWidgetId,
+                topicId: state.topicId,
                 courseId: state.courseId,
                 moduleId: state.moduleId,
-                topicId: state.topicId,
                 lessonId: state.lessonId
             }
 
-            return Object.assign({}, newState)
+            qqq = Object.assign({}, qqq)
+            return {
+                widgets: [
+                    {
+                        id: 123,
+                        text: '',
+                        type: 'HEADING',
+                        size: '2',
+                        orderOfWidget: 1,
+                        name: ''
+                    }
+                ]
+            };
 
         case constants.FIND_WIDGETS:
             var newState = {

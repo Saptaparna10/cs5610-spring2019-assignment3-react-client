@@ -3,27 +3,35 @@ import {connect} from 'react-redux'
 import WidgetList from '../components/WidgetList'
 import {DELETE_WIDGET, MOVE_DOWN} from "../constants";
 import * as actions from '../actions'
+import reducer from '../reducers/WidgetReducer'
 
 
-const stateToPropertyMapper = state => ({
-    widgets: state.widgets,
-    previewMode: state.preview,
-    disableUp: false,
-    disableDown: false,
-    nonUniqueName: state.nonUniqueName,
-    nonUniqueWidgetId: state.nonUniqueWidgetId,
-    topicId:state.topicId,
-    courseId: state.courseId,
-    moduleId: state.moduleId,
-    lessonId: state.lessonId
-})
+const stateToPropertyMapper = state => {
+    return {
+        widgets: state.widgets,
+        previewMode: state.preview,
+        disableUp: false,
+        disableDown: false,
+        nonUniqueName: state.nonUniqueName,
+        nonUniqueWidgetId: state.nonUniqueWidgetId,
+        topicId:state.topicId,
+        courseId: state.courseId,
+        moduleId: state.moduleId,
+        lessonId: state.lessonId
+    };
+}
+
 
 const dispatchToPropertyMapper = (dispatch, props) => ({
 
-    addWidget: () =>
-        dispatch({
-            type: 'ADD_WIDGET'
-        }),
+    addWidget: () => {
+        // dispatch({
+        //     type: 'ADD_WIDGET',
+        //     topicId: topicId,
+        //     widgets: widgets
+        // }),
+        actions.addWidget(dispatch)
+    },
 
     deleteWidget: widget => {
         // props.deleteWidget(widget);
@@ -103,5 +111,7 @@ const WidgetListContainer = connect(
     stateToPropertyMapper,
     dispatchToPropertyMapper
 )(WidgetList)
+
+
 
 export default WidgetListContainer

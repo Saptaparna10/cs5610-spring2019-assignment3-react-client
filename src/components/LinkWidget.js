@@ -27,7 +27,7 @@ const LinkWidget = ({widget, preview, linkURLChanged, widgetNameChanged, widgetT
                         <div className="col-sm-10">
                             <input className="form-control" id="linkUrl"
                                    onChange={() => linkURLChanged(widget.id, inputUrlElem.value)}
-                                   value={href}
+                                   defaultValue={href}
                                    ref={node => inputUrlElem = node} placeholder="Link URL"/>
                         </div>
                     </div>
@@ -37,7 +37,7 @@ const LinkWidget = ({widget, preview, linkURLChanged, widgetNameChanged, widgetT
                         <div className="col-sm-10">
                             <input className="form-control" id="linkText"
                                    onChange={() => widgetTextChanged(widget.id, inputElem.value)}
-                                   value={widget.text}
+                                   defaultValue={widget.text}
                                    ref={node => inputElem = node} placeholder="Link Text"/>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ const LinkWidget = ({widget, preview, linkURLChanged, widgetNameChanged, widgetT
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName" placeholder="Widget Name"
                                    onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
-                                   value={name}
+                                   defaultValue={name}
                                    ref={node => inputNameElem = node}/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&
                             <div className="alert alert-danger mt-2" role="alert">

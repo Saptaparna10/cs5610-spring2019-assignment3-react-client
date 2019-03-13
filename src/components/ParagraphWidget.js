@@ -21,7 +21,7 @@ const ParagraphWidget = ({widget, preview, widgetTextChanged, widgetNameChanged,
                         <div className="col-sm-10">
                             <textarea className="form-control" id="paragraphText"
                                       onChange={() => widgetTextChanged(widget.id, inputElem.value)}
-                                      value={widget.text}
+                                      defaultValue={widget.text}
                                       ref={node => inputElem = node} placeholder="Paragraph Text"></textarea>
                         </div>
                     </div>
@@ -31,7 +31,7 @@ const ParagraphWidget = ({widget, preview, widgetTextChanged, widgetNameChanged,
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName" placeholder="Widget Name"
                                    onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
-                                   value={name}
+                                   defaultValue={name}
                                    ref={node => inputNameElem = node}/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&
                             <div className="alert alert-danger mt-2" role="alert">

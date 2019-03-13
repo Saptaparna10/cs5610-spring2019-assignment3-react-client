@@ -501,8 +501,8 @@ class CourseEditor
 
                             <Provider store={store}>
                                 <WidgetListContainer
-                                 widgets={this.state.widgets}
-                                 topicId={this.state.topic.id}
+                                 //widgets={this.state.widgets}
+                                 //topicId={this.state.topic.id}
                                 // deleteWidget={this.deleteWidget}
                                 />
                             </Provider>

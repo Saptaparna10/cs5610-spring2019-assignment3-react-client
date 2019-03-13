@@ -38,7 +38,7 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <div className="col-sm-10">
                             <textarea className="form-control mt-3"
                                       onChange={() => listItemsChanged(widget.id, inputElem.value)}
-                                      value={listItems}
+                                      defaultValue={listItems}
                                       ref={node => inputElem = node}
                                       placeholder="Put each item in a separate row"></textarea>
                         </div>
@@ -49,7 +49,7 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <div className="col-sm-10">
                             <select className="form-control mt-3"
                                     onChange={() => listTypeChanged(widget.id, selectElem.value)}
-                                    value={listType}
+                                    defaultValue={listType}
                                     ref={node => selectElem = node} id="listType">
                                 <option value="1">Unordered list</option>
                                 <option value="2">Ordered List</option>
@@ -61,7 +61,7 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName" placeholder="Widget Name"
                                    onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
-                                   value={name}
+                                   defaultValue={name}
                                    ref={node => inputNameElem = node}/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&
                             <div className="alert alert-danger mt-2" role="alert">

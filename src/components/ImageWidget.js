@@ -38,7 +38,7 @@ class ImageWidget extends React.Component {
                             <div className="col-sm-10">
                                 <input className="form-control" id="imageUrl"
                                        onChange={() => imageURLChanged(widget.id, inputElem.value)}
-                                       value={src}
+                                       defaultValue={src}
                                        ref={node => inputElem = node} placeholder="Image URL"/>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ class ImageWidget extends React.Component {
                             <div className="col-sm-10">
                                 <input className="form-control" id="widgetName" placeholder="Widget Name"
                                        onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
-                                       value={name}
+                                       defaultValue={name}
                                        ref={node => inputNameElem = node}/>
                                 {nonUniqueName && nonUniqueWidgetId === widget.id &&
                                 <div className="alert alert-danger mt-2" role="alert">

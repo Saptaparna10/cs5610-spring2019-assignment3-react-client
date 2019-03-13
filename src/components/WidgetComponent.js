@@ -22,7 +22,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         <h2 className="float-left d-none d-md-block ">{widget.type} Widget</h2>
                         <i className="btn btn-danger fa fa fa-times m-0 float-right " title="Update Topic Name"
                            onClick={() => deleteWidget(widget)}></i>
-                        <select className="form-control w-25 h-60 float-right m-0 mr-2 container-fluid" value={widget.type}
+                        <select className="form-control w-25 h-60 float-right m-0 mr-2 container-fluid" defaultValue={widget.type}
                                 onChange={() => selectWidgetType(widget, selectElement.value)}
                                 ref={node => selectElement = node}>
                             <option value='HEADING'>Heading</option>
