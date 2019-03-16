@@ -6,7 +6,7 @@ import Toggle from "react-toggle";
 
 const WidgetList = ({widgets, topicId, addWidget, deleteWidget, updateWidget, selectWidgetType, moveUp, moveDown, findWidgets, preview, previewMode, disableUp, disableDown,
                         widgetTextChanged, widgetNameChanged, headingSizeChanged, nonUniqueName, nonUniqueWidgetId,
-                        listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged, dispatch}) =>
+                        listTypeChanged, listItemsChanged, imageURLChanged, linkURLChanged, dispatch, saveWidgets}) =>
     <div
         // onLoad={findWidgets()}
     >
@@ -22,10 +22,10 @@ const WidgetList = ({widgets, topicId, addWidget, deleteWidget, updateWidget, se
                     </div>
                 </label>
 
-                {/*<button className="btn btn-success mr-3 float-right" hidden={preview}*/}
-                {/*onClick={this.props.save} title="Save">*/}
-                {/*Save*/}
-                {/*</button>*/}
+                <button className="btn btn-success mr-3 float-right" hidden={preview}
+                onClick={saveWidgets} title="Save">
+                Save
+                </button>
             </div>
         </div>
         <div className="list-group">

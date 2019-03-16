@@ -37,7 +37,10 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <label htmlFor="listItems" className="col-sm-2 col-form-label "><h5>List Items</h5></label>
                         <div className="col-sm-10">
                             <textarea className="form-control mt-3"
-                                      onChange={() => listItemsChanged(widget.id, inputElem.value)}
+                                      onChange={() => {
+                                          widget.listItems= inputElem.value
+                                          listItemsChanged(widget)
+                                      }}
                                       defaultValue={listItems}
                                       ref={node => inputElem = node}
                                       placeholder="Put each item in a separate row"></textarea>
@@ -48,7 +51,10 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <label htmlFor="listType" className="col-sm-2 col-form-label "><h5>List Type</h5></label>
                         <div className="col-sm-10">
                             <select className="form-control mt-3"
-                                    onChange={() => listTypeChanged(widget.id, selectElem.value)}
+                                    onChange={() => {
+                                        widget.listType=selectElem.value
+                                        listTypeChanged(widget)
+                                    }}
                                     defaultValue={listType}
                                     ref={node => selectElem = node} id="listType">
                                 <option value="1">Unordered list</option>
@@ -60,7 +66,10 @@ const ListWidget = ({widget, preview, listItemsChanged, listTypeChanged, widgetN
                         <label htmlFor="widgetName" className="col-sm-2 col-form-label"><h5>Widget Name</h5></label>
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName" placeholder="Widget Name"
-                                   onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
+                                   onChange={() => {
+                                       widget.name = inputNameElem.value
+                                       widgetNameChanged(widget)}
+                                   }
                                    defaultValue={name}
                                    ref={node => inputNameElem = node}/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&

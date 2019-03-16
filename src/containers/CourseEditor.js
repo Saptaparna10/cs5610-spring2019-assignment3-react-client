@@ -15,6 +15,7 @@ import ModuleService from "../services/ModuleService";
 import LessonService from "../services/LessonService";
 import TopicService from "../services/TopicService";
 import UserService from "../services/UserService";
+import WidgetService from "../services/WidgetService";
 
 class CourseEditor
     extends React.Component{
@@ -30,6 +31,7 @@ class CourseEditor
         this.ModuleService = new ModuleService();
         this.LessonService = new LessonService();
         this.TopicService = new TopicService();
+        this.WidgetService = new WidgetService();
 
         this.state = {
             courseId:'',
@@ -81,6 +83,14 @@ class CourseEditor
         this.deleteTopic = this.deleteTopic.bind(this);
         this.editTopic = this.editTopic.bind(this);
         this.updateTopic = this.updateTopic.bind(this);
+
+        this.addWidget = this.addWidget.bind(this);
+        this.deleteWidget = this.deleteWidget.bind(this);
+        //this.selectWidgetType = this.selectWidgetType.bind(this);
+        this.updateWidgetGeneric = this.updateWidgetGeneric.bind(this);
+        this.moveUp = this.moveUp.bind(this);
+        this.moveDown = this.moveDown.bind(this);
+        this.saveWidgets = this.saveWidgets.bind(this);
     }
 
 
@@ -373,10 +383,68 @@ class CourseEditor
 
     /**----------Widgets-------------**/
 
+    addWidget() {
+        var orderOfWidget = 0;
+        if (this.state.widgets.length > 0)
+            orderOfWidget = this.state.widgets[this.state.widgets.length - 1].orderOfWidget;
+
+        this.setState({widgets:  [
+                ...this.state.widgets,
+
+                {
+                    //id: state.widgets.length + 1,
+                    text: '',
+                    type: 'HEADING',
+                    size: '2',
+                    orderOfWidget: ++orderOfWidget,
+                    name: ''
+                }
+
+            ]});
+    }
+
     deleteWidget(widget) {
-        var removeIndex = this.state.topic.widgets.map(function(item) { return item.id; }).indexOf(widget.id);
-        this.state.topic.widgets.splice(removeIndex, 1);
-        this.setState({widgets: this.state.topic.widgets})
+        // var removeIndex = this.state.topic.widgets.map(function(item) { return item; }).indexOf(widget.id);
+        // this.state.topic.widgets.splice(removeIndex, 1);
+
+        this.setState({widgets: this.state.widgets.filter(w => w !== widget)})
+    }
+
+    updateWidgetGeneric(widget){
+        //var filtered= this.state.widgets.filter(w => w !== widget)
+
+        this.setState({widgets: this.state.widgets.map(w => {
+                if(w === widget)
+                    return widget
+                else
+                    return w
+            })})
+    }
+
+    moveUp(widget){
+        let index = this.state.widgets.indexOf(widget);
+
+        var updatedList = this.state.widgets
+        updatedList.splice(index-1, 0, updatedList.splice(index, 1)[0]);
+        this.setState({
+            widgets: updatedList.splice(0)
+        });
+    }
+
+    moveDown(widget){
+
+        let indexDown = this.state.widgets.indexOf(widget);
+        var updatedList = this.state.widgets
+        updatedList.splice(indexDown + 1, 0, updatedList.splice(indexDown, 1)[0]);
+
+        this.setState({
+            widgets: updatedList.splice(0)
+        });
+    }
+
+    saveWidgets(){
+        this.WidgetService.saveWidgets(this.state.widgets, this.state.topic.id)
+            .then((widgets) => this.setState({widgets: widgets}))
     }
 
     /**------------Render--------------**/
@@ -501,9 +569,16 @@ class CourseEditor
 
                             <Provider store={store}>
                                 <WidgetListContainer
+                                    key={this.state.topic.id}
                                  //widgets={this.state.widgets}
                                  //topicId={this.state.topic.id}
-                                // deleteWidget={this.deleteWidget}
+                                    deleteWidget={this.deleteWidget}
+                                    addWidget={this.addWidget}
+                                    //selectWidgetType={this.selectWidgetType}
+                                    updateWidgetGeneric={this.updateWidgetGeneric}
+                                    moveUp={this.moveUp}
+                                    moveDown={this.moveDown}
+                                    saveWidgets={this.saveWidgets}
                                 />
                             </Provider>
                         </div>

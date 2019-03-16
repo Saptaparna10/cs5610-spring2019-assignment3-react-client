@@ -50,7 +50,9 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <label htmlFor="headingText" className="col-sm-2 col-form-label "><h5>Heading Text</h5></label>
                         <div className="col-sm-10">
                             <input className="form-control" id="headingText"
-                                   onChange={() => widgetTextChanged(widget.id, inputElemHead.value)}
+                                   onChange={() => {
+                                       widget.text= inputElemHead.value
+                                       widgetTextChanged(widget)}}
                                    defaultValue={widget.text}
                                    ref={node => inputElemHead = node} placeholder="Heading Text"/>
                         </div>
@@ -59,7 +61,9 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <label htmlFor="headingSize" className="col-sm-2 col-form-label"><h5>Heading Size</h5></label>
                         <div className="col-sm-10">
                             <select className="form-control" id="headingSize"
-                                    onChange={() => headingSizeChanged(widget.id, selectElem.value)}
+                                    onChange={() => {
+                                        widget.size= selectElem.value
+                                        headingSizeChanged(widget)}}
                                     defaultValue={widget.size}
                                     ref={node => selectElem = node}>
                                 <option value="1">Heading 1</option>
@@ -72,7 +76,10 @@ const HeadingWidget = ({widget, preview, widgetTextChanged, headingSizeChanged, 
                         <label htmlFor="widgetName" className="col-sm-2 col-form-label"><h5>Widget Name</h5></label>
                         <div className="col-sm-10">
                             <input className="form-control" id="widgetName"
-                                   onChange={() => widgetNameChanged(widget.id, inputNameElemHead.value)}
+                                   onChange={() => {
+                                       widget.name = inputNameElemHead.value
+                                       widgetNameChanged(widget)}
+                                   }
                                    defaultValue={name}
                                    ref={node => inputNameElemHead = node} placeholder="Widget Name"/>
                             {nonUniqueName && nonUniqueWidgetId === widget.id &&

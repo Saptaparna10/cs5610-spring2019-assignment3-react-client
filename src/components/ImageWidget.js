@@ -37,7 +37,10 @@ class ImageWidget extends React.Component {
                             <label htmlFor="imageUrl" className="col-sm-2 col-form-label "><h5>Image URL</h5></label>
                             <div className="col-sm-10">
                                 <input className="form-control" id="imageUrl"
-                                       onChange={() => imageURLChanged(widget.id, inputElem.value)}
+                                       onChange={() => {
+                                           widget.src = inputElem.value
+                                           imageURLChanged(widget)
+                                       }}
                                        defaultValue={src}
                                        ref={node => inputElem = node} placeholder="Image URL"/>
                             </div>
@@ -48,7 +51,10 @@ class ImageWidget extends React.Component {
                             <label htmlFor="widgetName" className="col-sm-2 col-form-label"><h5>Widget Name</h5></label>
                             <div className="col-sm-10">
                                 <input className="form-control" id="widgetName" placeholder="Widget Name"
-                                       onChange={() => widgetNameChanged(widget.id, inputNameElem.value)}
+                                       onChange={() => {
+                                           widget.name = inputNameElem.value
+                                           widgetNameChanged(widget)}
+                                       }
                                        defaultValue={name}
                                        ref={node => inputNameElem = node}/>
                                 {nonUniqueName && nonUniqueWidgetId === widget.id &&

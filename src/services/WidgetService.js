@@ -2,19 +2,19 @@ import widgets from '../resources/widgets'
 import courses from '../resources/courses.json'
 import * as constants from "../constants";
 
-let _singleton = Symbol();
+//let _singleton = Symbol();
 
 class WidgetServiceClient {
-    constructor(singletonToken) {
-        if (_singleton !== singletonToken)
-            throw new Error('Cannot instantiate directly.');
-    }
-
-    static get instance() {
-        if (!this[_singleton])
-            this[_singleton] = new WidgetServiceClient(_singleton);
-        return this[_singleton]
-    }
+    // constructor(singletonToken) {
+    //     if (_singleton !== singletonToken)
+    //         throw new Error('Cannot instantiate directly.');
+    // }
+    //
+    // static get instance() {
+    //     if (!this[_singleton])
+    //         this[_singleton] = new WidgetServiceClient(_singleton);
+    //     return this[_singleton]
+    // }
 
     findAllWidgets() {
       return widgets;
@@ -95,6 +95,19 @@ class WidgetServiceClient {
             'credentials': 'include',
             method : 'put',
             body : JSON.stringify(widget),
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    }
+
+    saveWidgets(widgets, topicId){
+        return fetch(constants.BASE_URL+'/api/save/topics/'+topicId+'/widgets', {
+            'credentials': 'include',
+            method : 'post',
+            body : JSON.stringify(widgets),
             headers : {
                 'Content-Type': 'application/json'
             }

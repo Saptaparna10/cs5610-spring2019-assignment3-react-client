@@ -23,7 +23,10 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         <i className="btn btn-danger fa fa fa-times m-0 float-right " title="Update Topic Name"
                            onClick={() => deleteWidget(widget)}></i>
                         <select className="form-control w-25 h-60 float-right m-0 mr-2 container-fluid" defaultValue={widget.type}
-                                onChange={() => selectWidgetType(widget, selectElement.value)}
+                                onChange={() => {
+                                    widget.type=selectElement.value
+                                    selectWidgetType(widget)
+                                }}
                                 ref={node => selectElement = node}>
                             <option value='HEADING'>Heading</option>
                             <option value='PARAGRAPH'>Paragraph</option>
@@ -45,6 +48,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                 </div>
                 <div>
                     {widget.type === 'HEADING' && <HeadingWidget
+                        key={key}
                         preview={preview}
                         widget={widget}
                         widgetTextChanged={widgetTextChanged}
@@ -54,6 +58,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         nonUniqueWidgetId={nonUniqueWidgetId}/>}
 
                     {widget.type === 'PARAGRAPH' && <ParagraphWidget
+                        key={key}
                         preview={preview}
                         widget={widget}
                         widgetTextChanged={widgetTextChanged}
@@ -62,6 +67,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         nonUniqueWidgetId={nonUniqueWidgetId}
                     />}
                     {widget.type === 'LIST' && <ListWidget
+                        key={key}
                         preview={preview}
                         widget={widget}
                         listItemsChanged={listItemsChanged}
@@ -71,6 +77,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         nonUniqueWidgetId={nonUniqueWidgetId}/>}
 
                     {widget.type === 'IMAGE' && <ImageWidget
+                        key={key}
                         preview={preview}
                         widget={widget}
                         imageURLChanged={imageURLChanged}
@@ -78,6 +85,7 @@ const WidgetComponent = ({key, updateWidget, deleteWidget, selectWidgetType, mov
                         nonUniqueName={nonUniqueName}
                         nonUniqueWidgetId={nonUniqueWidgetId}/>}
                     {widget.type === 'LINK' && <LinkWidget
+                        key={key}
                         preview={preview}
                         widget={widget}
                         linkURLChanged={linkURLChanged}

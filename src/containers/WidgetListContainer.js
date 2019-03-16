@@ -30,15 +30,16 @@ const dispatchToPropertyMapper = (dispatch, props) => ({
         //     topicId: topicId,
         //     widgets: widgets
         // }),
-        actions.addWidget(dispatch)
+        //actions.addWidget(dispatch)
+        props.addWidget()
     },
 
     deleteWidget: widget => {
-        // props.deleteWidget(widget);
-        dispatch({
-            type: DELETE_WIDGET,
-            id: widget.id
-        })
+         props.deleteWidget(widget);
+        // dispatch({
+        //     type: DELETE_WIDGET,
+        //     id: widget.id
+        // })
     },
 
     updateWidget: widget =>
@@ -59,49 +60,73 @@ const dispatchToPropertyMapper = (dispatch, props) => ({
             //topicId:props.topicId
         }),
 
-    selectWidgetType: (widget,selectElement) =>
-        dispatch({
-            type: 'SELECT_WIDGET_TYPE',
-            id: widget.id,
-            widgetType: selectElement
-        }),
+    selectWidgetType: (widget,selectElement) => {
+        props.updateWidgetGeneric(widget)
 
-    moveUp: (widget) =>
-        dispatch({
-            type: 'MOVE_DOWN',
-            id: widget.id,
-            orderOfWidget: widget.orderOfWidget
-        }),
+        // dispatch({
+        //     type: 'SELECT_WIDGET_TYPE',
+        //     id: widget.id,
+        //     widgetType: selectElement
+        // }),
+    },
 
-    moveDown: (widget) =>
-        dispatch({
-            type: 'MOVE_UP',
-            id: widget.id,
-            orderOfWidget: widget.orderOfWidget
-        }),
+    moveUp: (widget) => {
+        props.moveUp(widget)
+    },
+        // dispatch({
+        //     type: 'MOVE_DOWN',
+        //     id: widget.id,
+        //     orderOfWidget: widget.orderOfWidget
+        // }),
 
-    widgetTextChanged: (widgetId, newText) =>
-        actions.widgetTextChanged(dispatch, widgetId, newText),
+    moveDown: (widget) =>{
+        props.moveDown(widget)
+    },
+        // dispatch({
+        //     type: 'MOVE_UP',
+        //     id: widget.id,
+        //     orderOfWidget: widget.orderOfWidget
+        // }),
 
-    headingSizeChanged: (widgetId, newSize) =>
-        actions.headingSizeChanged(dispatch, widgetId, newSize),
+    widgetTextChanged: (widget) => {
+        props.updateWidgetGeneric(widget)
+        //actions.widgetTextChanged(dispatch, widgetId, newText),
+    },
 
-    widgetNameChanged: (widgetId, newName) =>
-        actions.widgetNameChanged(dispatch, widgetId, newName),
+    headingSizeChanged: (widget) => {
+        props.updateWidgetGeneric(widget)
+        //actions.headingSizeChanged(dispatch, widgetId, newSize),
+    },
+
+    widgetNameChanged: (widget) => {
+        props.updateWidgetGeneric(widget)
+        // actions.widgetNameChanged(dispatch, widgetId, newName),
+    },
     // Image
-    imageURLChanged: (widgetId, newUrl) =>
-        actions.imageURLChanged(dispatch, widgetId, newUrl),
+    imageURLChanged: (widget) => {
+        props.updateWidgetGeneric(widget)
+        //actions.imageURLChanged(dispatch, widgetId, newUrl),
+    },
 
     // Link
-    linkURLChanged: (widgetId, newLinkUrl) =>
-        actions.linkURLChanged(dispatch, widgetId, newLinkUrl),
+    linkURLChanged: (widget) =>
+        {props.updateWidgetGeneric(widget)},
+        //actions.linkURLChanged(dispatch, widgetId, newLinkUrl),
 
     // List
-    listItemsChanged: (widgetId, newListItems) =>
-        actions.listItemsChanged(dispatch, widgetId, newListItems),
+    listItemsChanged: (widget) =>{
+        props.updateWidgetGeneric(widget)
+    },
+        //actions.listItemsChanged(dispatch, widgetId, newListItems),
 
-    listTypeChanged: (widgetId, newListType) =>
-        actions.listTypeChanged(dispatch, widgetId, newListType),
+    listTypeChanged: (widget) => {
+        {props.updateWidgetGeneric(widget)}
+    },
+        //actions.listTypeChanged(dispatch, widgetId, newListType),
+
+    saveWidgets: () => {
+        props.saveWidgets()
+    },
 
     preview: () => actions.preview(dispatch)
 
